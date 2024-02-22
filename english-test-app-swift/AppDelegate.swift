@@ -1,8 +1,9 @@
-//
-//  AppDelegate.swift
-//  english-test-app-swift
-//
-//  Created by 内藤広貴 on 2024/02/22.
-//
+import UIKit
+import Firebase
 
-import Foundation
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
+        return true
+    }
+}

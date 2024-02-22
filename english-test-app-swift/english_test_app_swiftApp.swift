@@ -1,10 +1,19 @@
 import SwiftUI
+import FirebaseCore
 
 @main
-struct english_test_app_swiftApp: App {
+struct EnglishTestAppSwiftApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @StateObject var viewModel = AuthViewModel()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            // ログイン状態によって表示するページを変更する
+            if viewModel.isAuthenticated {
+                TopView(viewModel: viewModel) // ログイン後に表示するページ
+            } else {
+                SignInView(viewModel: viewModel) // ログインページ
+            }
         }
     }
 }
