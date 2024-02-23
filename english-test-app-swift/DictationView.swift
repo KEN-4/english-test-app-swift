@@ -2,7 +2,6 @@ import SwiftUI
 
 struct DictationView: View {
     @ObservedObject var viewModel: DictationViewModel
-    var scoreModel: ScoreModel
 
     var body: some View {
         VStack {

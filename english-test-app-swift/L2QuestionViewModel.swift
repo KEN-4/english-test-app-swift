@@ -8,7 +8,7 @@ class L2QuestionViewModel: ObservableObject {
     @Published var currentQuestionIndex = 0
     @Published var isAnswered = false
     @Published var result: String?
-    @Published var showDictationView = false
+    @Published var showResultView = false
     
     var audioPlayer: AVAudioPlayer?
     var scoreModel = ScoreModel()
@@ -64,7 +64,6 @@ class L2QuestionViewModel: ObservableObject {
         isAnswered = true
         if choice == currentQuestion.correctAnswer {
             result = "正解"
-            // 正解時の処理をここに追加
             currentQuestion.skills.forEach { skill in
                 scoreModel.addScore(skill: skill, additionalScore: currentQuestion.score / Double(currentQuestion.skills.count))
             }
@@ -81,7 +80,7 @@ class L2QuestionViewModel: ObservableObject {
             isAnswered = false
             result = nil
         } else {
-            showDictationView = true
+            showResultView = true
         }
     }
 }

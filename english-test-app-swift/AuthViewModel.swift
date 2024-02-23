@@ -4,8 +4,7 @@ import FirebaseFirestore
 
 class AuthViewModel: ObservableObject {
     @Published var isAuthenticated = false
-    @Published var isNewUser = false  // 新規ユーザーフラグ
-    // イニシャライザメソッドを呼び出して、アプリの起動時に認証状態をチェックする
+    @Published var isNewUser = false
     init() {
             observeAuthChanges()
         }
@@ -17,13 +16,14 @@ class AuthViewModel: ObservableObject {
                 }
             }
         }
+    
     // ログインするメソッド
     func signIn(email: String, password: String) {
             Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
                 DispatchQueue.main.async {
                     if result != nil, error == nil {
                         self?.isAuthenticated = true
-                        self?.isNewUser = true  // 新規登録成功時に新規ユーザーフラグをtrueに設定
+                        self?.isNewUser = true
                     }
                 }
             }

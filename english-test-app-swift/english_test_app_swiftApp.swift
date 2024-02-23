@@ -8,11 +8,10 @@ struct EnglishTestAppSwiftApp: App {
 
     var body: some Scene {
         WindowGroup {
-            // ログイン状態によって表示するページを変更する
             if viewModel.isAuthenticated {
-                TopView(viewModel: viewModel) // ログイン後に表示するページ
+                TopView(viewModel: viewModel)
             } else {
-                SignInView(viewModel: viewModel) // ログインページ
+                SignInView(viewModel: viewModel)
             }
         }
     }

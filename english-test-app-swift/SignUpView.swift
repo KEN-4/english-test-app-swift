@@ -8,8 +8,8 @@ struct SignUpView: View {
     var body: some View {
         VStack {
             TextField("Email", text: $email)
-                .autocapitalization(.none) // 自動大文字化を無効にする
-                .keyboardType(.emailAddress) // キーボードタイプをメールアドレス用に設定
+                .autocapitalization(.none)
+                .keyboardType(.emailAddress)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
 

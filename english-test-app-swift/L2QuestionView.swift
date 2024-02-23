@@ -24,11 +24,10 @@ struct L2QuestionView: View {
                 }
             }
             // ResultViewへの遷移を制御するNavigationLink
-            NavigationLink(destination: DictationView(viewModel: DictationViewModel(), scoreModel: viewModel.scoreModel), isActive: $viewModel.showDictationView) {
+            NavigationLink(destination: ResultView(scoreModel: viewModel.scoreModel), isActive: $viewModel.showResultView) {
                 EmptyView()
             }
         }
-
         .onAppear {
             viewModel.fetchQuestions()
         }
