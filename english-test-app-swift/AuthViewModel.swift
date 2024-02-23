@@ -4,6 +4,7 @@ import FirebaseFirestore
 
 class AuthViewModel: ObservableObject {
     @Published var isAuthenticated = false
+    @Published var isNewUser = false  // 新規ユーザーフラグ
     // イニシャライザメソッドを呼び出して、アプリの起動時に認証状態をチェックする
     init() {
             observeAuthChanges()
@@ -22,6 +23,7 @@ class AuthViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     if result != nil, error == nil {
                         self?.isAuthenticated = true
+                        self?.isNewUser = true  // 新規登録成功時に新規ユーザーフラグをtrueに設定
                     }
                 }
             }
@@ -37,6 +39,7 @@ class AuthViewModel: ObservableObject {
                     print("登録に失敗しました：\(error.localizedDescription)")
                 } else if let user = result?.user {
                     self.isAuthenticated = true
+                    self.isNewUser = true
                     // Firestoreにユーザー情報を保存
                     self.saveUserInfo(user: user, email: email)
                 }
@@ -75,6 +78,7 @@ class AuthViewModel: ObservableObject {
             do {
                 try Auth.auth().signOut()
                 isAuthenticated = false
+                isNewUser = false  // ログアウト時には新規ユーザーではない
             } catch let signOutError as NSError {
                 print("Error signing out: %@", signOutError)
             }
