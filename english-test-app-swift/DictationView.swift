@@ -24,9 +24,5 @@ struct DictationView: View {
                 }
             }
         }
-        // ResultViewへの遷移を制御するNavigationLink
-        NavigationLink(destination: ResultView(scoreModel: viewModel.scoreModel), isActive: $viewModel.showResultView) {
-            EmptyView()
-        }
     }
 }
