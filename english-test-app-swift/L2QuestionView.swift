@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct L2QuestionView: View {
-    @ObservedObject var viewModel = L2QuestionViewModel()
+    @ObservedObject var viewModel: QuestionViewModel
 
     var body: some View {
         VStack {
-            if let question = viewModel.questions[safe: viewModel.currentQuestionIndex] {
+            if let question = viewModel.currentQuestion {
                 Text("発音した単語を選んでください")
                 Button("Play Audio") {
                     viewModel.playAudio(from: question.audioUrl)
@@ -22,14 +22,9 @@ struct L2QuestionView: View {
                         viewModel.goToNextQuestion()
                     }
                 }
+            } else {
+                Text("質問をロード中...")
             }
-            // ResultViewへの遷移を制御するNavigationLink
-            NavigationLink(destination: ResultView(scoreModel: viewModel.scoreModel), isActive: $viewModel.showResultView) {
-                EmptyView()
-            }
-        }
-        .onAppear {
-            viewModel.fetchQuestions()
         }
     }
 }
@@ -38,8 +33,4 @@ extension Array {
     subscript(safe index: Int) -> Element? {
         return indices.contains(index) ? self[index] : nil
     }
-}
-
-#Preview {
-    L2QuestionView()
 }
