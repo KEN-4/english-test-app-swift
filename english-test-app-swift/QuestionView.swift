@@ -13,6 +13,8 @@ struct QuestionView: View {
                     DictationView(viewModel: viewModel)
                 case "voicechoice":
                     VoiceChoiceQuestionView(viewModel: viewModel)
+                case "conversataion":
+                    ConversationQuestionView(viewModel: viewModel)
                 default:
                     Text("Unsupported question type")
                 }
