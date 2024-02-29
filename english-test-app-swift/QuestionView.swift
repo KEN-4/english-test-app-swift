@@ -19,6 +19,8 @@ struct QuestionView: View {
                     FillInTheBlankQuestionView(viewModel: viewModel)
                 case "translation":
                     TranslationView(viewModel: viewModel)
+                case "choice":
+                    ChoiceQuestionView(viewModel: viewModel)
                 default:
                     Text("Unsupported question type")
                 }

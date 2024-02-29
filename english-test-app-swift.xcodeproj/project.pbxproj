@@ -37,6 +37,7 @@
 		E7E637B02B8EBAE60019B843 /* ConversationQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E637AF2B8EBAE60019B843 /* ConversationQuestionView.swift */; };
 		E7E637B22B9015E60019B843 /* FillInTheBlankQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E637B12B9015E60019B843 /* FillInTheBlankQuestionView.swift */; };
 		E7E637B42B901D010019B843 /* TranslationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E637B32B901D010019B843 /* TranslationView.swift */; };
+		E7E69F292B9087A9005DE6DC /* ChoiceQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E69F282B9087A9005DE6DC /* ChoiceQuestionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		E7E637AF2B8EBAE60019B843 /* ConversationQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationQuestionView.swift; sourceTree = "<group>"; };
 		E7E637B12B9015E60019B843 /* FillInTheBlankQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillInTheBlankQuestionView.swift; sourceTree = "<group>"; };
 		E7E637B32B901D010019B843 /* TranslationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationView.swift; sourceTree = "<group>"; };
+		E7E69F282B9087A9005DE6DC /* ChoiceQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceQuestionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				E7E637AF2B8EBAE60019B843 /* ConversationQuestionView.swift */,
 				E7E637B12B9015E60019B843 /* FillInTheBlankQuestionView.swift */,
 				E7E637B32B901D010019B843 /* TranslationView.swift */,
+				E7E69F282B9087A9005DE6DC /* ChoiceQuestionView.swift */,
 				E7B6ACC12B88359A00784056 /* ResultView.swift */,
 				E7B6ACA92B87455700784056 /* SignInView.swift */,
 				E7B6ACAD2B874DAA00784056 /* AuthViewModel.swift */,
@@ -230,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7B6ACBE2B8834DC00784056 /* ScoreModel.swift in Sources */,
+				E7E69F292B9087A9005DE6DC /* ChoiceQuestionView.swift in Sources */,
 				E7B6ACA12B86EACA00784056 /* AppDelegate.swift in Sources */,
 				E7B6ACAC2B87477800784056 /* TopView.swift in Sources */,
 				E7B6ACAE2B874DAA00784056 /* AuthViewModel.swift in Sources */,
