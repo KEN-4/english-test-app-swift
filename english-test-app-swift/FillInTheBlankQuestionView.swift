@@ -1,14 +1,14 @@
 import SwiftUI
 import AVFoundation
 
-struct ConversationQuestionView: View {
+struct FillInTheBlankQuestionView: View {
     @ObservedObject var viewModel: QuestionViewModel
     
     var body: some View {
         NavigationView {
             VStack {
-                if let question = viewModel.currentQuestion {
-                    Text("会話文の続きを選んでください")
+                if viewModel.currentQuestion != nil {
+                    Text("会話文の続きの()を埋めてください")
                         .font(.title)
                         .padding()
                     // 会話文を表示
@@ -18,26 +18,12 @@ struct ConversationQuestionView: View {
                                 .padding(.bottom, 8)
                         }
                     }
-                    
-                    // 選択肢を表示
-                    if let choices = viewModel.currentQuestion?.choices {
-                        ForEach(choices.indices, id: \.self) { index in
-                            Button(action: {
-                                // 選択肢がタップされたときの処理
-                                self.viewModel.checkAnswer(choice: choices[index])
-                            }) {
-                                Text(choices[index])
-                                    .padding()
-                                    .frame(maxWidth: .infinity)
-                                    .background(viewModel.isAnswered ? Color.gray : Color.blue)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(10)
-                            }
-                            .disabled(viewModel.isAnswered) // 回答後はボタンを無効化
-                            .padding(.bottom, 8)
-                        }
+                    TextField("音声を文字起こししてください", text: $viewModel.textInput)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding()
+                    Button("答えをチェック") {
+                        viewModel.checkAnswers()
                     }
-
                     if viewModel.isAnswered {
                         Button(action: {
                             viewModel.goToNextQuestion()
@@ -53,6 +39,10 @@ struct ConversationQuestionView: View {
                     }
                 } else {
                     ProgressView("質問を読み込み中...")
+                }
+                // ResultViewへの遷移を制御するNavigationLink
+                NavigationLink(destination: ResultView(scoreModel: viewModel.scoreModel), isActive: $viewModel.showResultView) {
+                    EmptyView()
                 }
             }
         }

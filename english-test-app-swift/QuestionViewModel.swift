@@ -77,7 +77,7 @@ class QuestionViewModel: ObservableObject {
         if choice == currentQuestion.correctAnswer {
             result = "正解"
             currentQuestion.skills.forEach { skill in
-                scoreModel.addScore(skill: skill, additionalScore: currentQuestion.score / Double(currentQuestion.skills.count))
+                scoreModel.addScore(skill: skill, additionalScore: currentQuestion.score)
             }
         } else {
             result = "不正解"
@@ -95,7 +95,7 @@ class QuestionViewModel: ObservableObject {
         }) {
             result = "正解"
             currentQuestion.skills.forEach { skill in
-                scoreModel.addScore(skill: skill, additionalScore: currentQuestion.score / Double(currentQuestion.skills.count))
+                scoreModel.addScore(skill: skill, additionalScore: currentQuestion.score)
             }
         } else {
             result = "不正解"
