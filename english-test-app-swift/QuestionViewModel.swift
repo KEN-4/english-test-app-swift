@@ -10,6 +10,7 @@ class QuestionViewModel: ObservableObject {
     @Published var result: String?
     @Published var showResultView = false
     @Published var textInput: String = ""
+    @Published var choicesMade: [String] = [] // ユーザーが選択した選択肢を保持するリスト
     
     var audioPlayer: AVAudioPlayer?
     var scoreModel = ScoreModel()
@@ -85,19 +86,22 @@ class QuestionViewModel: ObservableObject {
         }
     }
     
-    // 回答をチェックする（Dictation用）
+    // 回答をチェックする
     func checkAnswers() {
+        print("checkAnswers called")
         guard let currentQuestion = currentQuestion else { return }
         
         isAnswered = true
         if currentQuestion.answers.contains(where: { answer in
             textInput.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == answer.lowercased()
         }) {
+            print("正解")
             result = "正解"
             currentQuestion.skills.forEach { skill in
                 scoreModel.addScore(skill: skill, additionalScore: currentQuestion.score)
             }
         } else {
+            print("不正解")
             result = "不正解"
         }
         textInput = ""
@@ -112,5 +116,24 @@ class QuestionViewModel: ObservableObject {
         } else {
             showResultView = true
         }
+    }
+    // 選択を追加する関数
+    func addChoiceToTextField(choice: String) {
+        choicesMade.append(choice)
+        textInput = choicesMade.joined(separator: " ")
+    }
+    
+    // 最後の選択を取り消す関数
+    func removeLastChoice() {
+        if !choicesMade.isEmpty {
+            choicesMade.removeLast()
+            textInput = choicesMade.joined(separator: " ")
+        }
+    }
+    
+    // 選択肢のリストをクリアする関数
+    func clearChoices() {
+        choicesMade.removeAll()
+        textInput = ""
     }
 }
