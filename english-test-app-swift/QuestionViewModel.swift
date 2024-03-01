@@ -10,7 +10,13 @@ class QuestionViewModel: ObservableObject {
     @Published var result: String?
     @Published var showResultView = false
     @Published var textInput: String = ""
-    @Published var choicesMade: [String] = [] // ユーザーが選択した選択肢を保持するリスト
+    @Published var choicesMade: [String] = []
+    
+    var progress: Float {
+        guard !questions.isEmpty else { return 0 }
+        return Float(currentQuestionIndex + 1) / Float(questions.count)
+    }
+
     
     var audioPlayer: AVAudioPlayer?
     var scoreModel = ScoreModel()
@@ -114,6 +120,7 @@ class QuestionViewModel: ObservableObject {
             isAnswered = false
             result = nil
         } else {
+            // 全ての質問が回答された
             showResultView = true
         }
     }
@@ -135,5 +142,11 @@ class QuestionViewModel: ObservableObject {
     func clearChoices() {
         choicesMade.removeAll()
         textInput = ""
+    }
+}
+
+extension Array {
+    subscript(safe index: Int) -> Element? {
+        return indices.contains(index) ? self[index] : nil
     }
 }

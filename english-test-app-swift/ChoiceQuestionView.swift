@@ -16,22 +16,21 @@ struct ChoiceQuestionView: View {
                 ForEach(question.choices, id: \.self) { choice in
                     Button(choice) {
                         viewModel.checkAnswer(choice: choice)
+                        viewModel.goToNextQuestion()
                     }
                     .disabled(viewModel.isAnswered)
                 }
                 if viewModel.isAnswered {
                     Text("正解: \(question.correctAnswer)")
                     Button("次の質問") {
-                        // モーダルを表示するために状態変数をtrueに設定
-                        showingModal = true
                     }
                 }
             } else {
                 Text("質問をロード中...")
             }
         }
-        // ResultViewへのモーダル遷移を設定
-        .fullScreenCover(isPresented: $showingModal) {
+        // ResultViewへのモーダル遷移をviewModel.showResultViewに基づいて設定
+        .fullScreenCover(isPresented: $viewModel.showResultView) {
             // ここでモーダルとして表示したいビューを指定
             ResultView(scoreModel: viewModel.scoreModel)
         }

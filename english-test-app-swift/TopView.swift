@@ -26,8 +26,6 @@ struct TopView: View {
 }
 
 
-struct Top_Previews: PreviewProvider {
-    static var previews: some View {
-        TopView()
-    }
+#Preview {
+    TopView()
 }
