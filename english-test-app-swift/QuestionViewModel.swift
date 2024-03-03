@@ -14,7 +14,7 @@ class QuestionViewModel: ObservableObject {
     
     var progress: Float {
         guard !questions.isEmpty else { return 0 }
-        return Float(currentQuestionIndex + 1) / Float(questions.count)
+        return Float(currentQuestionIndex) / Float(questions.count - 1)
     }
 
     
