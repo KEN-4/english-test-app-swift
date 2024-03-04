@@ -3,7 +3,7 @@ import AVFoundation
 
 struct ChoiceQuestionView: View {
     @ObservedObject var viewModel: QuestionViewModel
-    @State private var showingModal = false // モーダル表示のための状態変数
+    @State private var showingModal = false
 
     var body: some View {
         VStack {

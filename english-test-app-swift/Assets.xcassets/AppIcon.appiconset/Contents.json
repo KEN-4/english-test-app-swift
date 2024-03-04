@@ -326,6 +326,13 @@
       "subtype" : "45mm"
     },
     {
+      "idiom" : "watch",
+      "role" : "quickLook",
+      "scale" : "2x",
+      "size" : "129x129",
+      "subtype" : "49mm"
+    },
+    {
       "filename" : "1024.png",
       "idiom" : "watch-marketing",
       "scale" : "1x",
