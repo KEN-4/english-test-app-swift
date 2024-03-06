@@ -33,6 +33,7 @@
 		E7C707D12B86E20800459D4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7C707D02B86E20800459D4A /* Assets.xcassets */; };
 		E7C707D42B86E20800459D4A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7C707D32B86E20800459D4A /* Preview Assets.xcassets */; };
 		E7E00FE82B95F4CA003DEE42 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = E7E00FE72B95F4CA003DEE42 /* DGCharts */; };
+		E7E00FEA2B9690DE003DEE42 /* UIViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E00FE92B9690DE003DEE42 /* UIViewControllerRepresentable.swift */; };
 		E7E637AC2B8C9BA00019B843 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E7E637AB2B8C9BA00019B843 /* FirebaseAnalytics */; };
 		E7E637AE2B8C9D1F0019B843 /* VoiceChoiceQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E637AD2B8C9D1F0019B843 /* VoiceChoiceQuestionView.swift */; };
 		E7E637B02B8EBAE60019B843 /* ConversationQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E637AF2B8EBAE60019B843 /* ConversationQuestionView.swift */; };
@@ -75,6 +76,7 @@
 		E7C707CC2B86E20600459D4A /* english_test_app_swiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = english_test_app_swiftApp.swift; sourceTree = "<group>"; };
 		E7C707D02B86E20800459D4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7C707D32B86E20800459D4A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E7E00FE92B9690DE003DEE42 /* UIViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerRepresentable.swift; sourceTree = "<group>"; };
 		E7E637AD2B8C9D1F0019B843 /* VoiceChoiceQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceChoiceQuestionView.swift; sourceTree = "<group>"; };
 		E7E637AF2B8EBAE60019B843 /* ConversationQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationQuestionView.swift; sourceTree = "<group>"; };
 		E7E637B12B9015E60019B843 /* FillInTheBlankQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillInTheBlankQuestionView.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				E7E637B12B9015E60019B843 /* FillInTheBlankQuestionView.swift */,
 				E7E637B32B901D010019B843 /* TranslationView.swift */,
 				E7FC44372B94A09A00B4DE11 /* RadarChartViewRepresentable.swift */,
+				E7E00FE92B9690DE003DEE42 /* UIViewControllerRepresentable.swift */,
 				E7E69F282B9087A9005DE6DC /* ChoiceQuestionView.swift */,
 				E7B6ACC12B88359A00784056 /* ResultView.swift */,
 				E7B6ACAD2B874DAA00784056 /* AuthViewModel.swift */,
@@ -264,6 +267,7 @@
 				E7E637B22B9015E60019B843 /* FillInTheBlankQuestionView.swift in Sources */,
 				E7B6ACC22B88359A00784056 /* ResultView.swift in Sources */,
 				E7FC44382B94A09A00B4DE11 /* RadarChartViewRepresentable.swift in Sources */,
+				E7E00FEA2B9690DE003DEE42 /* UIViewControllerRepresentable.swift in Sources */,
 				E7B6ACCA2B8C386A00784056 /* QuestionView.swift in Sources */,
 				E7B6ACB02B874E2A00784056 /* SignUpView.swift in Sources */,
 				E7B6ACB82B88142B00784056 /* L2QuestionView.swift in Sources */,

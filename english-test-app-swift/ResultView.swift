@@ -5,24 +5,29 @@ import FirebaseFirestore
 
 struct ResultView: View {
     var scoreModel = ScoreModel()
+    @State private var screenshot: UIImage? = nil
+    @State private var isSharing = false
 
     var body: some View {
-        VStack(spacing: 20) {
-            Text("スコア").font(.title)
-            ForEach(scoreModel.scores.keys.sorted(), id: \.self) { key in
-                Text("\(key.capitalized): \(scoreModel.scores[key]!, specifier: "%.1f")")
+        NavigationView {
+            VStack(spacing: 20) {
+                Text("スコア").font(.title)
+                RadarChartViewRepresentable(entries: [
+                    RadarChartDataEntry(value: scoreModel.scores["listening"] ?? 0),
+                    RadarChartDataEntry(value: scoreModel.scores["speaking"] ?? 0),
+                    RadarChartDataEntry(value: scoreModel.scores["grammar"] ?? 0),
+                    RadarChartDataEntry(value: scoreModel.scores["vocabulary"] ?? 0)
+                ])
+                .frame(height: 400) // 適切な高さに調整
+                Text("おすすめの学習方法").font(.title).padding(.top)
+                ForEach(getMostNeededStudyMethods(scores: scoreModel.scores), id: \.self) { recommendation in
+                    Text(recommendation)
+                }
+                ShareLink(item: "テスト結果:リスニング\(scoreModel.scores["listening"] ?? 0)") {
+                    Label("Share", systemImage: "square.and.arrow.up")
+                }
             }
-            RadarChartViewRepresentable(entries: [
-                RadarChartDataEntry(value: scoreModel.scores["listening"] ?? 0),
-                RadarChartDataEntry(value: scoreModel.scores["speaking"] ?? 0),
-                RadarChartDataEntry(value: scoreModel.scores["grammar"] ?? 0),
-                RadarChartDataEntry(value: scoreModel.scores["vocabulary"] ?? 0)
-            ])
-            .frame(height: 300) // チャートの高さを指定
-            Text("おすすめの学習方法").font(.title).padding(.top)
-            ForEach(getMostNeededStudyMethods(scores: scoreModel.scores), id: \.self) { recommendation in
-                Text(recommendation)
-            }
+            .navigationBarTitle("テスト結果", displayMode: .inline)
         }
     }
 }
