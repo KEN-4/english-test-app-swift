@@ -2,7 +2,7 @@ import SwiftUI
 import FirebaseCore
 
 @main
-struct EnglishTestAppSwiftApp: App {
+struct EnglishTestAppSwift: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 //    @StateObject var viewModel = AuthViewModel()
 
