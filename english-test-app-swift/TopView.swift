@@ -8,17 +8,13 @@ struct TopView: View {
         NavigationView {
             VStack {
                 Button(action: {
-                    // ボタンをタップしたらモーダル表示をトリガー
                     showModal = true
                 }) {
-                    Text("診断開始")
-                        .padding()
+                    Text("診断開始").font(.title)
                 }
             }
             .navigationTitle("English Test")
-            // モーダル表示を定義
             .fullScreenCover(isPresented: $showModal) {
-                // 表示するビューを指定
                 QuestionView(viewModel: QuestionViewModel())
             }
         }

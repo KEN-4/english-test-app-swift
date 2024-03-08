@@ -6,6 +6,7 @@ import FirebaseStorage
 class QuestionViewModel: ObservableObject {
     @Published var questions: [Question] = []
     @Published var currentQuestionIndex = 0
+    @Published var selectedChoice: String? 
     @Published var isAnswered = false
     @Published var result: String?
     @Published var showResultView = false
@@ -74,6 +75,8 @@ class QuestionViewModel: ObservableObject {
         }
     }
     
+    
+    
     // 回答をチェックする
     func checkAnswer(choice: String) {
         guard currentQuestionIndex < questions.count else { return }
@@ -88,8 +91,13 @@ class QuestionViewModel: ObservableObject {
             }
         } else {
             result = "不正解"
-            // 不正解時の処理をここに追加
         }
+    }
+    
+    func submitAnswer() {
+        guard let choice = selectedChoice else { return }
+        checkAnswer(choice: choice)
+        selectedChoice = nil // 回答チェック後は選択をリセット
     }
     
     // 回答をチェックする
