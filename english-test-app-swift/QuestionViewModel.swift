@@ -6,7 +6,7 @@ import FirebaseStorage
 class QuestionViewModel: ObservableObject {
     @Published var questions: [Question] = []
     @Published var currentQuestionIndex = 0
-    @Published var selectedChoice: String? 
+    @Published var selectedChoice: String?
     @Published var isAnswered = false
     @Published var result: String?
     @Published var showResultView = false
@@ -85,12 +85,12 @@ class QuestionViewModel: ObservableObject {
         // 回答が正解かどうかをチェック
         isAnswered = true
         if choice == currentQuestion.correctAnswer {
-            result = "正解"
+            result = "⚪︎"
             currentQuestion.skills.forEach { skill in
                 scoreModel.addScore(skill: skill, additionalScore: currentQuestion.score)
             }
         } else {
-            result = "不正解"
+            result = "×"
         }
     }
     
@@ -110,13 +110,13 @@ class QuestionViewModel: ObservableObject {
             textInput.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == answer.lowercased()
         }) {
             print("正解")
-            result = "正解"
+            result = "⚪︎"
             currentQuestion.skills.forEach { skill in
                 scoreModel.addScore(skill: skill, additionalScore: currentQuestion.score)
             }
         } else {
             print("不正解")
-            result = "不正解"
+            result = "×"
         }
         textInput = ""
     }

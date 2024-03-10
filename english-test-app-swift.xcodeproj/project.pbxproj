@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E74E06322B9D2F96007CAFA5 /* GoogleAppMeasurement in Frameworks */ = {isa = PBXBuildFile; productRef = E74E06312B9D2F96007CAFA5 /* GoogleAppMeasurement */; };
+		E74E06342B9D2F96007CAFA5 /* GoogleAppMeasurementOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = E74E06332B9D2F96007CAFA5 /* GoogleAppMeasurementOnDeviceConversion */; };
+		E74E06362B9D2F96007CAFA5 /* GoogleAppMeasurementWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = E74E06352B9D2F96007CAFA5 /* GoogleAppMeasurementWithoutAdIdSupport */; };
 		E7B6AC942B86E66000784056 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7B6AC932B86E66000784056 /* GoogleService-Info.plist */; };
 		E7B6AC992B86E73900784056 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = E7B6AC982B86E73900784056 /* FirebaseAnalyticsOnDeviceConversion */; };
 		E7B6AC9B2B86E73900784056 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E7B6AC9A2B86E73900784056 /* FirebaseAnalyticsSwift */; };
@@ -90,9 +93,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E74E06342B9D2F96007CAFA5 /* GoogleAppMeasurementOnDeviceConversion in Frameworks */,
+				E74E06322B9D2F96007CAFA5 /* GoogleAppMeasurement in Frameworks */,
 				E7B6AC9B2B86E73900784056 /* FirebaseAnalyticsSwift in Frameworks */,
 				E7B6ACA82B8743AA00784056 /* FirebaseAuth in Frameworks */,
 				E7E637AC2B8C9BA00019B843 /* FirebaseAnalytics in Frameworks */,
+				E74E06362B9D2F96007CAFA5 /* GoogleAppMeasurementWithoutAdIdSupport in Frameworks */,
 				E7B6AC992B86E73900784056 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				E7B6AC9F2B86E73900784056 /* FirebaseAppCheck in Frameworks */,
 				E7B6ACBA2B88171000784056 /* FirebaseStorage in Frameworks */,
@@ -196,6 +202,9 @@
 				E7B6ACB92B88171000784056 /* FirebaseStorage */,
 				E7E637AB2B8C9BA00019B843 /* FirebaseAnalytics */,
 				E7E00FE72B95F4CA003DEE42 /* DGCharts */,
+				E74E06312B9D2F96007CAFA5 /* GoogleAppMeasurement */,
+				E74E06332B9D2F96007CAFA5 /* GoogleAppMeasurementOnDeviceConversion */,
+				E74E06352B9D2F96007CAFA5 /* GoogleAppMeasurementWithoutAdIdSupport */,
 			);
 			productName = "english-test-app-swift";
 			productReference = E7C707C92B86E20600459D4A /* english-test-app-swift.app */;
@@ -228,6 +237,7 @@
 			packageReferences = (
 				E7B6AC952B86E73900784056 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				E7E00FE62B95F4CA003DEE42 /* XCRemoteSwiftPackageReference "Charts" */,
+				E74E06302B9D2F96007CAFA5 /* XCRemoteSwiftPackageReference "GoogleAppMeasurement" */,
 			);
 			productRefGroup = E7C707CA2B86E20600459D4A /* Products */;
 			projectDirPath = "";
@@ -491,6 +501,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E74E06302B9D2F96007CAFA5 /* XCRemoteSwiftPackageReference "GoogleAppMeasurement" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleAppMeasurement";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.22.1;
+			};
+		};
 		E7B6AC952B86E73900784056 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -510,6 +528,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E74E06312B9D2F96007CAFA5 /* GoogleAppMeasurement */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E74E06302B9D2F96007CAFA5 /* XCRemoteSwiftPackageReference "GoogleAppMeasurement" */;
+			productName = GoogleAppMeasurement;
+		};
+		E74E06332B9D2F96007CAFA5 /* GoogleAppMeasurementOnDeviceConversion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E74E06302B9D2F96007CAFA5 /* XCRemoteSwiftPackageReference "GoogleAppMeasurement" */;
+			productName = GoogleAppMeasurementOnDeviceConversion;
+		};
+		E74E06352B9D2F96007CAFA5 /* GoogleAppMeasurementWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E74E06302B9D2F96007CAFA5 /* XCRemoteSwiftPackageReference "GoogleAppMeasurement" */;
+			productName = GoogleAppMeasurementWithoutAdIdSupport;
+		};
 		E7B6AC982B86E73900784056 /* FirebaseAnalyticsOnDeviceConversion */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E7B6AC952B86E73900784056 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
