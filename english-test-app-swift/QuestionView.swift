@@ -31,9 +31,49 @@ struct QuestionView: View {
                     Text("Unsupported question type")
                 }
             }
+            Spacer()
+            
+            if !viewModel.isAnswered {
+                Button("送信") {
+                    viewModel.submitAnswer()
+                }
+                .disabled(viewModel.isAnswered || (viewModel.selectedChoice == nil && viewModel.textInput.isEmpty))
+                .padding()
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+                .padding(.horizontal)
+            }
+            // 回答後のフィードバック表示
+            if viewModel.isAnswered {
+                // 正解または不正解の表示
+                Text(viewModel.result ?? "エラー")
+                    .font(.headline)
+                    .foregroundColor(viewModel.result == "⚪︎" ? .green : .red)
+
+                if let question = viewModel.currentQuestion, ["dictation", "fill_in_the_blank", "translation"].contains(question.type) {
+                    Text("正解: \(question.answers[0])")
+                } else if let question = viewModel.currentQuestion {
+                    Text("正解: \(question.correctAnswer)")
+                        .padding()
+                }
+                
+                // 「次の質問へ」ボタン
+                Button("次の質問へ") {
+                    viewModel.goToNextQuestion()
+                }
+                .padding()
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .background(Color.green)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+                .padding(.horizontal)
+            }
         }
     }
 }
+
 
 struct ProgressBar: View {
     var progress: Float

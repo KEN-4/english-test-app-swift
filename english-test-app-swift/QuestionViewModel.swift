@@ -94,12 +94,6 @@ class QuestionViewModel: ObservableObject {
         }
     }
     
-    func submitAnswer() {
-        guard let choice = selectedChoice else { return }
-        checkAnswer(choice: choice)
-        selectedChoice = nil // 回答チェック後は選択をリセット
-    }
-    
     // 回答をチェックする
     func checkAnswers() {
         print("checkAnswers called")
@@ -120,6 +114,44 @@ class QuestionViewModel: ObservableObject {
         }
         textInput = ""
     }
+    
+    func submitAnswer() {
+        guard let currentQuestion = currentQuestion else { return }
+        
+        isAnswered = true // 回答されたフラグを立てる
+        
+        switch currentQuestion.type {
+        case "choice", "2-choices", "voicechoice", "conversation":
+            // 選択肢ベースの質問の処理
+            guard let choice = selectedChoice else { return }
+            let isCorrect = choice == currentQuestion.correctAnswer
+            updateResult(isCorrect: isCorrect)
+            
+        case "dictation", "fill_in_the_blank", "translation":
+            // 入力テキストベースの質問の処理
+            let isCorrect = currentQuestion.answers.contains { answer in
+                textInput.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == answer.lowercased()
+            }
+            updateResult(isCorrect: isCorrect)
+            textInput = "" // 入力フィールドをクリア
+            
+        default:
+            print("Unsupported question type: \(currentQuestion.type)")
+        }
+        
+        // 結果の更新とスキルスコアの加算
+        func updateResult(isCorrect: Bool) {
+            result = isCorrect ? "⚪︎" : "×"
+            if isCorrect {
+                currentQuestion.skills.forEach { skill in
+                    scoreModel.addScore(skill: skill, additionalScore: currentQuestion.score)
+                }
+            }
+        }
+        
+        selectedChoice = nil // 選択肢をリセット
+    }
+
 
     // 次の質問へ移動する
     func goToNextQuestion() {
