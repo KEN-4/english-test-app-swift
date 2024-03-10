@@ -10,7 +10,7 @@ struct QuestionView: View {
                 .frame(height: 20)
                 .padding()
             
-
+            Spacer()
             if let questionType = viewModel.currentQuestion?.type {
                 switch questionType {
                 case "2-choices":
@@ -91,5 +91,11 @@ struct ProgressBar: View {
             }
             .cornerRadius(45.0)
         }
+    }
+}
+
+struct QuestionView_Previews: PreviewProvider {
+    static var previews: some View {
+        QuestionView(viewModel: QuestionViewModel())
     }
 }

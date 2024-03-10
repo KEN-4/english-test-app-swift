@@ -1,10 +1,3 @@
-//
-//  VoiceChoiceQuestionView.swift
-//  english-test-app-swift
-//
-//  Created by 内藤広貴 on 2024/02/26.
-//
-
 import SwiftUI
 
 struct VoiceChoiceQuestionView: View {
@@ -14,24 +7,32 @@ struct VoiceChoiceQuestionView: View {
         VStack {
             if let question = viewModel.currentQuestion {
                 Text("音声の続きの選択肢を選んでください")
+                    .padding()
                 Button("Play Audio") {
                     viewModel.playAudio(from: question.audioUrl)
                 }
+                .padding()
                 ForEach(question.choices, id: \.self) { choice in
-                    Button(choice) {
-                        viewModel.checkAnswer(choice: choice)
+                    Button(action: {
+                        viewModel.selectedChoice = choice
+                    }) {
+                        Text(choice)
+                            .padding()
+                            .foregroundColor(viewModel.selectedChoice == choice ? .black : .white)
+                            .background(viewModel.selectedChoice == choice ? Color.green : Color.blue)
+                            .cornerRadius(10)
                     }
                     .disabled(viewModel.isAnswered)
-                }
-                if viewModel.isAnswered {
-                    Text("正解: \(question.correctAnswer)")
-                    Button("次の質問") {
-                        viewModel.goToNextQuestion()
-                    }
                 }
             } else {
                 Text("質問をロード中...")
             }
         }
+    }
+}
+
+struct VoiceChoiceQuestionView_Previews: PreviewProvider {
+    static var previews: some View {
+        QuestionView(viewModel: QuestionViewModel())
     }
 }

@@ -26,3 +26,9 @@ struct DictationView: View {
         }
     }
 }
+
+struct DictationView_Previews: PreviewProvider {
+    static var previews: some View {
+        QuestionView(viewModel: QuestionViewModel())
+    }
+}

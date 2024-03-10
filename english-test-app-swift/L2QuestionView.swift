@@ -15,7 +15,6 @@ struct L2QuestionView: View {
                 // 選択肢を表示
                 ForEach(question.choices, id: \.self) { choice in
                     Button(action: {
-                        // 選択した選択肢をviewModelに設定
                         viewModel.selectedChoice = choice
                     }) {
                         Text(choice)
@@ -24,12 +23,18 @@ struct L2QuestionView: View {
                             .background(viewModel.selectedChoice == choice ? Color.green : Color.blue)
                             .cornerRadius(10)
                     }
-                    .disabled(viewModel.isAnswered) // 回答後は選択肢を無効化
+                    .disabled(viewModel.isAnswered)
                 }
             } else {
                 Text("質問をロード中...")
             }
         }
-        .padding() // コンテンツ全体にパディングを追加
+    }
+}
+
+
+struct L2QuestionView_Previews: PreviewProvider {
+    static var previews: some View {
+        QuestionView(viewModel: QuestionViewModel())
     }
 }
