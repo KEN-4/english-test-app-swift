@@ -11,6 +11,7 @@ struct TopView: View {
                     showModal = true
                 }) {
                     Text("診断開始").font(.title)
+                        .foregroundColor(.customBlue)
                 }
             }
             .navigationTitle("English Test")

@@ -40,8 +40,8 @@ struct QuestionView: View {
                 .disabled(viewModel.isAnswered || (viewModel.selectedChoice == nil && viewModel.textInput.isEmpty))
                 .padding()
                 .frame(minWidth: 0, maxWidth: .infinity)
-                .background(Color.blue)
-                .foregroundColor(.white)
+                .background(Color.customBlue)
+                .foregroundColor(Color.customWhite)
                 .cornerRadius(10)
                 .padding(.horizontal)
             }
@@ -50,8 +50,7 @@ struct QuestionView: View {
                 // 正解または不正解の表示
                 Text(viewModel.result ?? "エラー")
                     .font(.headline)
-                    .foregroundColor(viewModel.result == "⚪︎" ? .green : .red)
-
+                    .foregroundColor(.customRed)
                 if let question = viewModel.currentQuestion, ["dictation", "fill_in_the_blank", "translation"].contains(question.type) {
                     Text("正解: \(question.answers[0])")
                 } else if let question = viewModel.currentQuestion {
@@ -65,8 +64,8 @@ struct QuestionView: View {
                 }
                 .padding()
                 .frame(minWidth: 0, maxWidth: .infinity)
-                .background(Color.green)
-                .foregroundColor(.white)
+                .background(Color.customGreen)
+                .foregroundColor(.customWhite)
                 .cornerRadius(10)
                 .padding(.horizontal)
             }
@@ -83,10 +82,10 @@ struct ProgressBar: View {
             ZStack(alignment: .leading) {
                 Rectangle().frame(width: geometry.size.width, height: geometry.size.height)
                     .opacity(0.3)
-                    .foregroundColor(Color.gray)
+                    .foregroundColor(Color.customGray)
                 
                 Rectangle().frame(width: min(CGFloat(progress) * geometry.size.width, geometry.size.width), height: geometry.size.height)
-                    .foregroundColor(Color.blue)
+                    .foregroundColor(.customPurple)
                     .animation(.linear, value: progress)
             }
             .cornerRadius(45.0)
