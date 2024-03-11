@@ -19,7 +19,7 @@ struct QuestionView: View {
                     DictationView(viewModel: viewModel)
                 case "voicechoice":
                     VoiceChoiceQuestionView(viewModel: viewModel)
-                case "conversataion":
+                case "conversation":
                     ConversationQuestionView(viewModel: viewModel)
                 case "fill_in_the_blank":
                     FillInTheBlankQuestionView(viewModel: viewModel)
@@ -40,7 +40,7 @@ struct QuestionView: View {
                 .disabled(viewModel.isAnswered || (viewModel.selectedChoice == nil && viewModel.textInput.isEmpty))
                 .padding()
                 .frame(minWidth: 0, maxWidth: .infinity)
-                .background(Color.customBlue)
+                .background(viewModel.selectedChoice != nil || !viewModel.textInput.isEmpty ? Color.customBlue : Color.customGray)
                 .foregroundColor(Color.customWhite)
                 .cornerRadius(10)
                 .padding(.horizontal)

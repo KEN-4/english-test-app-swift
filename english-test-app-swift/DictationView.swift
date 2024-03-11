@@ -10,6 +10,7 @@ struct DictationView: View {
                     Button("Play Audio") {
                         viewModel.playAudio(from: question.audioUrl)
                     }
+                    .foregroundColor(.customBlue)
                     .padding()
                     TextField("音声を文字起こししてください", text: $viewModel.textInput)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
