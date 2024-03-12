@@ -23,27 +23,70 @@ let studyRecommendations: [String: [String: String]] = [
     ]
 ]
 
-func getMostNeededStudyMethods(scores: [String: Double]) -> [String] {
-    let lowestSkills = scores.filter { $0.value == scores.values.min() }.keys
-    var recommendations: [String] = []
-
-    for skill in lowestSkills {
-        let level: String
-        let score = scores[skill, default: 0.0]
-
-        switch score {
-        case 7.0...:
-            level = "advanced"
-        case 4.0..<7.0:
-            level = "intermediate"
-        default:
-            level = "beginner"
-        }
-
-        if let recommendation = studyRecommendations[skill]?[level] {
-            recommendations.append(recommendation)
-        }
+func getMostNeededStudyMethod(scores: [String: Double]) -> String? {
+    guard let lowestSkill = scores.min(by: { $0.value < $1.value })?.key else {
+        return nil
+    }
+    
+    let score = scores[lowestSkill, default: 0.0]
+    let level: String
+    
+    switch score {
+    case 7.0...:
+        level = "advanced"
+    case 4.0..<7.0:
+        level = "intermediate"
+    default:
+        level = "beginner"
     }
 
-    return recommendations
+    return studyRecommendations[lowestSkill]?[level]
+}
+
+
+
+let animalTypes: [String: [String: String]] = [
+    "listening": [
+        "beginner": "カメ",
+        "intermediate": "キツネ",
+        "advanced": "チーター"
+    ],
+    "speaking": [
+        "beginner": "カナリア",
+        "intermediate": "オウム",
+        "advanced": "インコ"
+    ],
+    "grammar": [
+        "beginner": "アリ",
+        "intermediate": "ゾウ",
+        "advanced": "イルカ"
+    ],
+    "vocabulary": [
+        "beginner": "ウサギ",
+        "intermediate": "リス",
+        "advanced": "ヒョウ"
+    ]
+]
+
+func getAnimalType(scores: [String: Double]) -> String {
+    
+    guard let highestSkill = scores.max(by: { $0.value < $1.value })?.key else {
+         return "動物タイプが特定できません"
+    }
+    
+    let score = scores[highestSkill, default: 0.0]
+    let level: String
+    
+    switch score {
+    case 7.0...:
+        level = "advanced"
+    case 4.0..<7.0:
+        level = "intermediate"
+    default:
+        level = "beginner"
+    }
+    
+    let animal = animalTypes[highestSkill]?[level] ?? "不明"
+    
+    return animal
 }
