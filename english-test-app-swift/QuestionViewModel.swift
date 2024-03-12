@@ -40,7 +40,7 @@ class QuestionViewModel: ObservableObject {
                     let question = Question(id: doc.documentID, dictionary: data)
                     
                     // ここで取得した質問の詳細を出力
-                    print("質問ID: \(question.id), タイプ: \(question.type), 正解: \(question.correctAnswer)")
+                    debugPrint("質問ID: \(question.id), タイプ: \(question.type), 正解: \(question.correctAnswer)")
                     
                     return question
                 }
@@ -52,23 +52,22 @@ class QuestionViewModel: ObservableObject {
         let storageRef = Storage.storage().reference(forURL: storageUrlString)
         storageRef.downloadURL { url, error in
             guard let downloadURL = url else {
-                print("ダウンロードURLの取得エラー: \(String(describing: error))")
+                debugPrint("ダウンロードURLの取得エラー: \(String(describing: error))")
                 return
             }
             // URLSessionを使用して非同期にデータを取得
             URLSession.shared.dataTask(with: downloadURL) { data, response, error in
                 guard let data = data, error == nil else {
-                    print("音声ファイルのダウンロードエラー: \(String(describing: error))")
+                    debugPrint("音声ファイルのダウンロードエラー: \(String(describing: error))")
                     return
                 }
-                // メインスレッドで音声プレイヤーを更新
                 DispatchQueue.main.async { [self] in
                     do {
                         audioPlayer = try AVAudioPlayer(data: data)
                         audioPlayer?.prepareToPlay()
                         audioPlayer?.play()
                     } catch {
-                        print("音声再生エラー: \(error)")
+                        debugPrint("音声再生エラー: \(error)")
                     }
                 }
             }.resume()
@@ -96,20 +95,20 @@ class QuestionViewModel: ObservableObject {
     
     // 回答をチェックする
     func checkAnswers() {
-        print("checkAnswers called")
+        debugPrint("checkAnswers called")
         guard let currentQuestion = currentQuestion else { return }
         
         isAnswered = true
         if currentQuestion.answers.contains(where: { answer in
             textInput.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == answer.lowercased()
         }) {
-            print("正解")
+            debugPrint("正解")
             result = "⚪︎"
             currentQuestion.skills.forEach { skill in
                 scoreModel.addScore(skill: skill, additionalScore: currentQuestion.score)
             }
         } else {
-            print("不正解")
+            debugPrint("不正解")
             result = "×"
         }
         textInput = ""
@@ -136,7 +135,7 @@ class QuestionViewModel: ObservableObject {
             textInput = "" // 入力フィールドをクリア
             
         default:
-            print("Unsupported question type: \(currentQuestion.type)")
+            debugPrint("Unsupported question type: \(currentQuestion.type)")
         }
         
         // 結果の更新とスキルスコアの加算
