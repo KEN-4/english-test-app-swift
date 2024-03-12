@@ -8,21 +8,16 @@ struct ResultView: View {
     @State private var shareText: String = ""
 
     var body: some View {
+        let animalDetails = getAnimalTypeAndDetails(scores: scoreModel.scores)
         NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
-                    Text("スコア").font(.title)
-                    RadarChartViewRepresentable(entries: [
-                        RadarChartDataEntry(value: scoreModel.scores["listening"] ?? 0),
-                        RadarChartDataEntry(value: scoreModel.scores["speaking"] ?? 0),
-                        RadarChartDataEntry(value: scoreModel.scores["grammar"] ?? 0),
-                        RadarChartDataEntry(value: scoreModel.scores["vocabulary"] ?? 0)
-                    ])
-                    .frame(height: 400) // 適切な高さに調整
-                    Text("あなたの動物タイプは").font(.title).padding(.top)
-                    // ここに動物タイプを出力
-                    Text(getAnimalType(scores: scoreModel.scores))
-                        .font(.title2)
+                    Text("あなたの動物タイプは \(animalDetails.name)です").font(.title).padding(.top)
+                    Text(animalDetails.description).padding()
+                    Image(animalDetails.imageName)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 200)
                         .padding()
                     Text("おすすめの学習方法").font(.title).padding(.top)
                     if let recommendation = getMostNeededStudyMethod(scores: scoreModel.scores) {
@@ -31,10 +26,18 @@ struct ResultView: View {
                         Text("学習方法の推薦が利用できません")
                     }
                     ShareLink(item: shareText) {
-                        Label("スコアを共有", systemImage: "square.and.arrow.up")
+                        Label("診断結果を共有", systemImage: "square.and.arrow.up")
                     }
+                    Text("スコア").font(.title)
+                    RadarChartViewRepresentable(entries: [
+                        RadarChartDataEntry(value: scoreModel.scores["listening"] ?? 0),
+                        RadarChartDataEntry(value: scoreModel.scores["speaking"] ?? 0),
+                        RadarChartDataEntry(value: scoreModel.scores["grammar"] ?? 0),
+                        RadarChartDataEntry(value: scoreModel.scores["vocabulary"] ?? 0)
+                    ])
+                    .frame(height: 400) // 適切な高さに調整
                 }
-                .navigationBarTitle("テスト結果")
+                .navigationBarTitle("診断結果")
                 .onAppear {
                     // ビューが表示されるときに共有テキストを初期化
                     shareText = formatShareText()

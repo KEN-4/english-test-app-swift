@@ -45,33 +45,33 @@ func getMostNeededStudyMethod(scores: [String: Double]) -> String? {
 
 
 
-let animalTypes: [String: [String: String]] = [
+let animalTypes: [String: [String: (name: String, description: String, imageName: String)]] = [
     "listening": [
-        "beginner": "カメ",
-        "intermediate": "キツネ",
-        "advanced": "チーター"
+        "beginner": ("カメ", "ゆっくりと聞き、情報を吸収するあなたはカメタイプです。", "turtle"),
+        "intermediate": ("キツネ", "機敏に情報をキャッチし分析するあなたはキツネタイプです。", "fox"),
+        "advanced": ("チーター", "高速で情報を処理するあなたはチータータイプです。", "cheetah")
     ],
     "speaking": [
-        "beginner": "カナリア",
-        "intermediate": "オウム",
-        "advanced": "インコ"
+        "beginner": ("カナリア", "明るく鳴き、周りを楽しませるあなたはカナリアタイプです。", "canary"),
+        "intermediate": ("オウム", "色々な言葉を覚えて周りに伝えるあなたはオウムタイプです。", "parrot"),
+        "advanced": ("インコ", "鮮やかで存在感があり、高度なコミュニケーションを取るあなたはインコタイプです。", "parakeet")
     ],
     "grammar": [
-        "beginner": "アリ",
-        "intermediate": "ゾウ",
-        "advanced": "イルカ"
+        "beginner": ("アリ", "地道に基礎を積み重ねるあなたはアリタイプです。", "ant"),
+        "intermediate": ("ゾウ", "大きなステップを踏み出し、記憶力も抜群のあなたはゾウタイプです。", "elephant"),
+        "advanced": ("イルカ", "高度な知識を活用し、柔軟に思考するあなたはイルカタイプです。", "dolphin")
     ],
     "vocabulary": [
-        "beginner": "ウサギ",
-        "intermediate": "リス",
-        "advanced": "ヒョウ"
+        "beginner": ("ウサギ", "素早く基本的な単語を集めるあなたはウサギタイプです。", "rabbit"),
+        "intermediate": ("リス", "活動的に様々な単語を集め、使いこなすあなたはリスタイプです。", "squirrel"),
+        "advanced": ("ヒョウ", "広い範囲の語彙を持ち、敏捷に使い分けるあなたはヒョウタイプです。", "leopard")
     ]
 ]
 
-func getAnimalType(scores: [String: Double]) -> String {
-    
+
+func getAnimalTypeAndDetails(scores: [String: Double]) -> (name: String, description: String, imageName: String) {
     guard let highestSkill = scores.max(by: { $0.value < $1.value })?.key else {
-         return "動物タイプが特定できません"
+         return ("不明", "動物タイプが特定できません", "")
     }
     
     let score = scores[highestSkill, default: 0.0]
@@ -86,7 +86,9 @@ func getAnimalType(scores: [String: Double]) -> String {
         level = "beginner"
     }
     
-    let animal = animalTypes[highestSkill]?[level] ?? "不明"
-    
-    return animal
+    if let details = animalTypes[highestSkill]?[level] {
+        return details
+    } else {
+        return ("不明", "適切な動物タイプが見つかりません。", "")
+    }
 }
