@@ -13,6 +13,10 @@ struct TranslationView: View {
                             .foregroundColor(.customBlack)
                             .padding()
                         
+                        TextField("ボタンを押して文章を完成させてください", text: $viewModel.textInput)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding()
+                        
                         // 会話文を表示
                         if let sentences = viewModel.currentQuestion?.sentences {
                             ForEach(sentences, id: \.self) { sentence in
@@ -42,10 +46,6 @@ struct TranslationView: View {
                         .background(Color.customRed)
                         .foregroundColor(.customWhite)
                         .cornerRadius(8)
-                        
-                        TextField("ボタンを押して文章を完成させてください", text: $viewModel.textInput)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding()
                         
                         Button("Clear All Text") {
                             viewModel.clearChoices()

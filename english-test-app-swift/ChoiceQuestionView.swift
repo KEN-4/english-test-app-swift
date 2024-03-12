@@ -12,6 +12,14 @@ struct ChoiceQuestionView: View {
                     Text("正しいと思う選択肢を選んでください")
                         .foregroundColor(.customBlack)
                         .padding()
+                    // 会話文を表示
+                    if let sentences = viewModel.currentQuestion?.sentences {
+                        ForEach(sentences, id: \.self) { sentence in
+                            Text(sentence)
+                                .foregroundColor(.customBlack)
+                                .padding(.bottom, 8)
+                        }
+                    }
                     // 選択肢を表示
                     ForEach(question.choices, id: \.self) { choice in
                         Button(action: {
