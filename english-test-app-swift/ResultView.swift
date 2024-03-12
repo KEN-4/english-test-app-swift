@@ -3,12 +3,21 @@ import DGCharts
 import FirebaseAuth
 import FirebaseFirestore
 
+struct Photo: Transferable {
+    static var transferRepresentation: some TransferRepresentation {
+        ProxyRepresentation(exporting: \.image)
+    }
+    public var image: Image
+    public var caption: String
+}
+
 struct ResultView: View {
     var scoreModel = ScoreModel()
     @State private var shareText: String = ""
-
+    
     var body: some View {
         let animalDetails = getAnimalTypeAndDetails(scores: scoreModel.scores)
+        let photo = Photo(image: Image(animalDetails.imageName), caption: animalDetails.description)
         NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
@@ -25,9 +34,16 @@ struct ResultView: View {
                     } else {
                         Text("学習方法の推薦が利用できません")
                     }
-                    ShareLink(item: shareText) {
-                        Label("診断結果を共有", systemImage: "square.and.arrow.up")
-                    }
+                    ShareLink(
+                        "診断結果の動物画像を共有",
+                        item: photo,
+                        preview: SharePreview(
+                            photo.caption,
+                            image: photo.image))
+                    ShareLink(
+                           "診断結果のテキストを共有",
+                           item: "\(animalDetails.name)\n\(animalDetails.description)\n\nスコア結果:\n\(shareText)"
+                       )
                     Text("スコア").font(.title)
                     RadarChartViewRepresentable(entries: [
                         RadarChartDataEntry(value: scoreModel.scores["listening"] ?? 0),
@@ -47,16 +63,24 @@ struct ResultView: View {
     }
     
     func formatShareText() -> String {
-        // スコアのデータをテキストとして整形
+        // スコアのデータとおすすめの学習方法をテキストとして整形
+        let recommendationText: String
+        if let recommendation = getMostNeededStudyMethod(scores: scoreModel.scores) {
+            recommendationText = "\nおすすめの学習方法:\n\(recommendation)"
+        } else {
+            recommendationText = "\n学習方法の推薦が利用できません"
+        }
+
         let text = """
         スコア
         リスニング: \(scoreModel.scores["listening"] ?? 0)
         スピーキング: \(scoreModel.scores["speaking"] ?? 0)
         文法: \(scoreModel.scores["grammar"] ?? 0)
-        語彙: \(scoreModel.scores["vocabulary"] ?? 0)
+        語彙: \(scoreModel.scores["vocabulary"] ?? 0)\(recommendationText)
         """
         return text
     }
+
 }
 
 struct ResultView_Previews: PreviewProvider {

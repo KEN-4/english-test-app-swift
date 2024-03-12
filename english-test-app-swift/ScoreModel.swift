@@ -11,7 +11,7 @@ class ScoreModel {
     func addScore(skill: String, additionalScore: Double = 1.0) {
         // スキルに対して追加スコアをそのまま加算
         scores[skill, default: 0.0] += additionalScore
-        print("Score for \(skill) after adding: \(String(describing: scores[skill]))")
+        debugPrint("Score for \(skill) after adding: \(String(describing: scores[skill]))")
     }
 
 }
