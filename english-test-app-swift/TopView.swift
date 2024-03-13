@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TopView: View {
     @State private var showModal = false
+    @State private var showQuickTestModal = false
     @State private var animateBackground = false
 
     var body: some View {
@@ -14,29 +15,42 @@ struct TopView: View {
                         .animation(Animation.linear(duration: 3).repeatForever(autoreverses: true), value: animateBackground)
                         .edgesIgnoringSafeArea(.all)
 
-                    VStack {
-                        Button(action: {
+                    VStack(spacing: 20) {
+                        Button("診断開始") {
                             showModal = true
-                        }) {
-                            Text("診断開始").font(.title)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.customBlue)
-                                .cornerRadius(10)
                         }
-                        .frame(width: geometry.size.width * 0.8)
+                        .buttonStyle(PrimaryButtonStyle())
+                        .fullScreenCover(isPresented: $showModal) {
+                            QuestionView(viewModel: QuestionViewModel(collection: "questions"))
+                        }
+                        
+                        Button("クイック診断") {
+                            showQuickTestModal = true
+                        }
+                        .buttonStyle(PrimaryButtonStyle())
+                        .fullScreenCover(isPresented: $showQuickTestModal) {
+                            QuestionView(viewModel: QuestionViewModel(collection: "quickquestions"))
+                        }
                     }
-                    .frame(width: geometry.size.width, height: geometry.size.height)
                 }
-            }
-            .onAppear {
-                animateBackground = true
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .navigationTitle("English Test")
-            .fullScreenCover(isPresented: $showModal) {
-                QuestionView(viewModel: QuestionViewModel())
-            }
         }
+        .onAppear {
+            animateBackground = true
+        }
+    }
+}
+
+struct PrimaryButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .scaleEffect(configuration.isPressed ? 0.95 : 1)
     }
 }
 

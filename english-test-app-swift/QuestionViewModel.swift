@@ -27,26 +27,24 @@ class QuestionViewModel: ObservableObject {
         return questions[currentQuestionIndex]
     }
     
-    init() {
-        fetchQuestions()
+    init(collection: String = "questions") {
+        fetchQuestions(from: collection)
     }
 
-    func fetchQuestions() {
+    func fetchQuestions(from collection: String) {
         let firestore = Firestore.firestore()
-        firestore.collection("questions").getDocuments { (snapshot, error) in
+        firestore.collection(collection).getDocuments { (snapshot, error) in
             if let snapshot = snapshot {
                 self.questions = snapshot.documents.map { doc -> Question in
                     let data = doc.data()
                     let question = Question(id: doc.documentID, dictionary: data)
-                    
-                    // ここで取得した質問の詳細を出力
-                    debugPrint("質問ID: \(question.id), タイプ: \(question.type), 正解: \(question.correctAnswer)")
-                    
+                    // 省略
                     return question
                 }
             }
         }
     }
+
 
     func playAudio(from storageUrlString: String) {
         let storageRef = Storage.storage().reference(forURL: storageUrlString)
