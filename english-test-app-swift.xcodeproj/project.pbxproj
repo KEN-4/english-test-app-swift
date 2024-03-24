@@ -55,6 +55,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E7036B622BAFFED700833FC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E74E06372B9E8CC1007CAFA5 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		E74E06392BA00565007CAFA5 /* DebugModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugModel.swift; sourceTree = "<group>"; };
 		E7B6ACA02B86EACA00784056 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +130,7 @@
 		E7C707CB2B86E20600459D4A /* english-test-app-swift */ = {
 			isa = PBXGroup;
 			children = (
+				E7036B622BAFFED700833FC4 /* Info.plist */,
 				E7C707CC2B86E20600459D4A /* english_test_app_swift.swift */,
 				E7B6ACA02B86EACA00784056 /* AppDelegate.swift */,
 				E74E06392BA00565007CAFA5 /* DebugModel.swift */,
@@ -222,7 +224,6 @@
 			packageReferences = (
 				E7B6AC952B86E73900784056 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				E7E00FE62B95F4CA003DEE42 /* XCRemoteSwiftPackageReference "Charts" */,
-				E74E06302B9D2F96007CAFA5 /* XCRemoteSwiftPackageReference "GoogleAppMeasurement" */,
 			);
 			productRefGroup = E7C707CA2B86E20600459D4A /* Products */;
 			projectDirPath = "";
@@ -411,6 +412,8 @@
 				DEVELOPMENT_TEAM = 86D43JTR94;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "english-test-app-swift/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "英語力診断-テストを受けておすすめの学習方法を診断";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -444,6 +447,8 @@
 				DEVELOPMENT_TEAM = 86D43JTR94;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "english-test-app-swift/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "英語力診断-テストを受けておすすめの学習方法を診断";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -490,14 +495,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E74E06302B9D2F96007CAFA5 /* XCRemoteSwiftPackageReference "GoogleAppMeasurement" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/google/GoogleAppMeasurement";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.22.1;
-			};
-		};
 		E7B6AC952B86E73900784056 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
