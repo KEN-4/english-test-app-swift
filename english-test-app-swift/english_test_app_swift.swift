@@ -8,7 +8,7 @@ struct EnglishTestAppSwift: App {
 
     var body: some Scene {
         WindowGroup {
-            TopView()
+            LaunchScreen()
         }
     }
 }
