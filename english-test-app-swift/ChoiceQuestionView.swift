@@ -3,6 +3,7 @@ import AVFoundation
 
 struct ChoiceQuestionView: View {
     @ObservedObject var viewModel: QuestionViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     @State private var showingModal = false
     
     var body: some View {
@@ -41,7 +42,7 @@ struct ChoiceQuestionView: View {
             // ResultViewへのモーダル遷移をviewModel.showResultViewに基づいて設定
             .fullScreenCover(isPresented: $viewModel.showResultView) {
                 // ここでモーダルとして表示したいビューを指定
-                ResultView(scoreModel: viewModel.scoreModel)
+                ResultView(viewModel: authViewModel, scoreModel: viewModel.scoreModel)
             }
         }
     }
@@ -49,6 +50,6 @@ struct ChoiceQuestionView: View {
 
 struct ChoiceQuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionView(viewModel: QuestionViewModel())
+        ChoiceQuestionView(viewModel: QuestionViewModel())
     }
 }

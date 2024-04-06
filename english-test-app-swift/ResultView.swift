@@ -12,7 +12,10 @@ struct Photo: Transferable {
 }
 
 struct ResultView: View {
+    @ObservedObject var viewModel: AuthViewModel
     var scoreModel = ScoreModel()
+    @State private var showingLogin = false // ログイン画面表示フラグ
+    @State private var showingSignup = false // 新規登録画面表示フラグ
     @State private var shareText: String = ""
     
     var body: some View {
@@ -52,12 +55,31 @@ struct ResultView: View {
                         RadarChartDataEntry(value: scoreModel.scores["vocabulary"] ?? 0)
                     ])
                     .frame(height: 400) // 適切な高さに調整
+                    // 認証されていない場合にログインと新規登録ボタンを表示
+                    if !viewModel.isAuthenticated {
+                        Button("ログイン") {
+                            showingLogin = true
+                        }
+                        .sheet(isPresented: $showingLogin) {
+                            SignInView(viewModel: viewModel)
+                        }
+                        .padding()
+
+                        Button("新規登録") {
+                            showingSignup = true
+                        }
+                        .sheet(isPresented: $showingSignup) {
+                            SignUpView(viewModel: viewModel)
+                        }
+                        .padding()
+                    }
                 }
                 .navigationBarTitle("診断結果")
                 .onAppear {
                     // ビューが表示されるときに共有テキストを初期化
                     shareText = formatShareText()
                 }
+                
             }
         }
     }
