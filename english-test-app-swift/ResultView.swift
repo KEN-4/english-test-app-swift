@@ -73,6 +73,22 @@ struct ResultView: View {
                         }
                         .padding()
                     }
+                    if viewModel.isAuthenticated {
+                        NavigationLink(destination: LearningPage()) {
+                            Text("学習ページへ")
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                        .padding()
+
+                        Button("ログアウト") {
+                            viewModel.signOut()
+                        }
+                        .padding()
+                    }
                 }
                 .navigationBarTitle("診断結果")
                 .onAppear {
