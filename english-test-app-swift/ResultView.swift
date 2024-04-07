@@ -13,7 +13,7 @@ struct Photo: Transferable {
 
 struct ResultView: View {
     @ObservedObject var viewModel: AuthViewModel
-    var scoreModel = ScoreModel()
+    var scoreModel: ScoreModel = ScoreModel()
     @State private var showingLogin = false // ログイン画面表示フラグ
     @State private var showingSignup = false // 新規登録画面表示フラグ
     @State private var shareText: String = ""
@@ -92,7 +92,10 @@ struct ResultView: View {
                 }
                 .navigationBarTitle("診断結果")
                 .onAppear {
-                    // ビューが表示されるときに共有テキストを初期化
+                    if let savedScores = UserDefaults.standard.object(forKey: "userScores") as? [String: Double] {
+                        scoreModel.scores = savedScores
+                        debugPrint("保存されたスコア: \(savedScores)")
+                    }
                     shareText = formatShareText()
                 }
                 

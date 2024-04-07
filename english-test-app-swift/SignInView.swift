@@ -17,7 +17,6 @@ struct SignInView: View {
                 SecureField("Password", text: $password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
-
                 Button("Sign In") {
                     viewModel.signIn(email: email, password: password)
                 }

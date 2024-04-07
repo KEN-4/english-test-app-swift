@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E7036B662BB0F01E00833FC4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7036B652BB0F01E00833FC4 /* GoogleService-Info.plist */; };
 		E74E06382B9E8CC1007CAFA5 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74E06372B9E8CC1007CAFA5 /* DesignSystem.swift */; };
 		E74E063A2BA00565007CAFA5 /* DebugModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74E06392BA00565007CAFA5 /* DebugModel.swift */; };
 		E79C1BC82BBF9F660071B2D4 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79C1BC72BBF9F660071B2D4 /* LaunchScreen.swift */; };
@@ -41,6 +40,7 @@
 		E7E637B42B901D010019B843 /* TranslationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E637B32B901D010019B843 /* TranslationView.swift */; };
 		E7E69F292B9087A9005DE6DC /* ChoiceQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E69F282B9087A9005DE6DC /* ChoiceQuestionView.swift */; };
 		E7FC44382B94A09A00B4DE11 /* RadarChartViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FC44372B94A09A00B4DE11 /* RadarChartViewRepresentable.swift */; };
+		E7FD79712BC2A6B000E64010 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7FD79702BC2A6B000E64010 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,7 +57,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E7036B652BB0F01E00833FC4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E74E06372B9E8CC1007CAFA5 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		E74E06392BA00565007CAFA5 /* DebugModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugModel.swift; sourceTree = "<group>"; };
 		E79C1BC72BBF9F660071B2D4 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
@@ -87,6 +86,7 @@
 		E7E637B32B901D010019B843 /* TranslationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationView.swift; sourceTree = "<group>"; };
 		E7E69F282B9087A9005DE6DC /* ChoiceQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceQuestionView.swift; sourceTree = "<group>"; };
 		E7FC44372B94A09A00B4DE11 /* RadarChartViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarChartViewRepresentable.swift; sourceTree = "<group>"; };
+		E7FD79702BC2A6B000E64010 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +115,6 @@
 		E7C707C02B86E20600459D4A = {
 			isa = PBXGroup;
 			children = (
-				E7036B652BB0F01E00833FC4 /* GoogleService-Info.plist */,
 				E7C707CB2B86E20600459D4A /* english-test-app-swift */,
 				E7C707CA2B86E20600459D4A /* Products */,
 				E7B6ACA62B8743AA00784056 /* Frameworks */,
@@ -133,6 +132,7 @@
 		E7C707CB2B86E20600459D4A /* english-test-app-swift */ = {
 			isa = PBXGroup;
 			children = (
+				E7FD79702BC2A6B000E64010 /* GoogleService-Info.plist */,
 				E7C707CC2B86E20600459D4A /* english_test_app_swift.swift */,
 				E79C1BC72BBF9F660071B2D4 /* LaunchScreen.swift */,
 				E7B6ACA02B86EACA00784056 /* AppDelegate.swift */,
@@ -244,8 +244,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7C707D42B86E20800459D4A /* Preview Assets.xcassets in Resources */,
+				E7FD79712BC2A6B000E64010 /* GoogleService-Info.plist in Resources */,
 				E7C707D12B86E20800459D4A /* Assets.xcassets in Resources */,
-				E7036B662BB0F01E00833FC4 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

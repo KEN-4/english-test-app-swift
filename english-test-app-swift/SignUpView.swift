@@ -18,7 +18,13 @@ struct SignUpView: View {
                 .padding()
 
             Button("Sign Up") {
-                viewModel.signUp(email: email, password: password)
+                // UserDefaultsからスコアを読み込む試み
+                let scoresFromUserDefaults = viewModel.loadScoresFromUserDefaults()
+                let defaultScores = ["listening": 0.0, "speaking": 0.0, "grammar": 0.0, "vocabulary": 0.0]
+                // UserDefaultsにスコアがあるかどうかを確認し、あればそれを使用し、なければデフォルト値を使用
+                let scoresToUse = scoresFromUserDefaults ?? defaultScores
+                
+                viewModel.signUp(email: email, password: password, scores: scoresToUse)
             }
         }
     }

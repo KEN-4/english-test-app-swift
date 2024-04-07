@@ -12,6 +12,7 @@ class ScoreModel {
         // スキルに対して追加スコアをそのまま加算
         scores[skill, default: 0.0] += additionalScore
         debugPrint("Score for \(skill) after adding: \(String(describing: scores[skill]))")
+        UserDefaults.standard.set(scores, forKey: "userScores")
     }
 
 }
