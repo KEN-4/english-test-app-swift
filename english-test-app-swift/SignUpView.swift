@@ -20,14 +20,6 @@ struct SignUpView: View {
             Button("Sign Up") {
                 viewModel.signUp(email: email, password: password)
             }
-
-            if viewModel.isAuthenticated {
-                // ログイン後のページに遷移
-                if viewModel.isAuthenticated {
-                    LearningPage()
-                }
-
-            }
         }
     }
 }

@@ -21,12 +21,6 @@ struct SignInView: View {
                 Button("Sign In") {
                     viewModel.signIn(email: email, password: password)
                 }
-
-                if viewModel.isAuthenticated {
-                    // ログイン後のページに遷移
-                    LearningPage()
-                }
-
                 // 新規登録画面への遷移ボタン
                 NavigationLink(destination: SignUpView(viewModel: viewModel)) {
                     Text("Create Account")
