@@ -3,13 +3,18 @@ import SwiftUI
 struct LaunchScreen: View {
     @State private var startAnimation = false
     @State private var goToContentView = false
+    @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View {
         if goToContentView {
-            TopView()
+            if viewModel.isAuthenticated {
+                ResultView(viewModel: viewModel)
+            } else {
+                TopView()
+            }
         } else {
             ZStack {
-                Image("ant") // あなたのアプリアイコン
+                Image("ant")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100) // 初期サイズ
@@ -23,14 +28,14 @@ struct LaunchScreen: View {
                             goToContentView = true
                         }
                     }
+                .background(Color.white.ignoresSafeArea())
             }
-            .background(Color.white.ignoresSafeArea()) // ここで全画面を白で塗りつぶす
         }
     }
 }
 
 struct LaunchScreen_Previews: PreviewProvider {
     static var previews: some View {
-        LaunchScreen()
+        LaunchScreen().environmentObject(AuthViewModel())
     }
 }
