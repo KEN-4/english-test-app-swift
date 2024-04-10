@@ -38,7 +38,6 @@ class QuestionViewModel: ObservableObject {
                 self.questions = snapshot.documents.map { doc -> Question in
                     let data = doc.data()
                     let question = Question(id: doc.documentID, dictionary: data)
-                    // 省略
                     return question
                 }
             }
@@ -146,7 +145,7 @@ class QuestionViewModel: ObservableObject {
             }
         }
         
-        selectedChoice = nil // 選択肢をリセット
+        selectedChoice = nil
     }
 
 
@@ -157,7 +156,6 @@ class QuestionViewModel: ObservableObject {
             isAnswered = false
             result = nil
         } else {
-            // 全ての質問が回答された
             showResultView = true
         }
     }
@@ -175,7 +173,6 @@ class QuestionViewModel: ObservableObject {
         }
     }
     
-    // 選択肢のリストをクリアする関数
     func clearChoices() {
         choicesMade.removeAll()
         textInput = ""
