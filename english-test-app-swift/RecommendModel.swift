@@ -1,26 +1,129 @@
 import Foundation
 
-let studyRecommendations: [String: [String: String]] = [
+struct StudyRecommendation {
+    let level: String
+    let description: String
+    let steps: [String]
+    let resources: [String]
+}
+
+let studyRecommendations: [String: [String: StudyRecommendation]] = [
     "listening": [
-        "beginner": "洋楽を歌詞と共に聞いて&歌って、単語やフレーズの発音を自然に覚えましょう。",
-        "intermediate": "TED Talksや短いポッドキャストを通して、多様な話題やアクセントに慣れ、複雑な語彙を身につけましょう。",
-        "advanced": "好きな有名人のインタビュー動画や、洋画のシーンをシャドーイングしましょう。"
+        "beginner": StudyRecommendation(
+            level: "Beginner",
+            description: "洋楽を歌詞と共に聞いて&歌って、単語やフレーズの発音を自然に覚えましょう。",
+            steps: [
+                "取り組みたい曲を一つ決める",
+                "曲の歌詞の意味を調べてざっと読む（歌詞を全体的に理解するだけでOK！）",
+                "歌詞を見ながらその曲を何回も聴きましょう！",
+                "歌詞を見ながらその曲を何回も歌いましょう！自分自身で声に出して歌うことで、発音力もUPしますよ！",
+                "知らない単語や表現が出てきたら、調べてメモしましょう！"
+            ],
+            resources: [
+                "https://youtu.be/QDYfEBY9NM4?si=n4rAhebySJa-wEgn",
+                "https://youtu.be/fLexgOxsZu0?si=NYb1M347sc0pmYS_",
+                "https://youtu.be/eitDnP0_83k?feature=shared"
+            ]
+        ),
+        "intermediate": StudyRecommendation(
+            level: "Intermediate",
+            description: "TED Talks や短いポッドキャストを通して、多様な話題やアクセントに慣れ、複雑な語彙を身につけましょう。",
+            steps: [
+                "取り組みたい動画を一つ決める",
+                "その動画のうち、取り組みたい部分を1分程度切り取って選ぶ",
+                "その部分の日本語訳を理解する",
+                "発音やアクセントに気をつけながら、シャドーイングを行う"
+            ],
+            resources: [
+                "https://elllo.org/video/0726/737-Rocio-Who-Admire.html"
+            ]
+        ),
+        "advanced": StudyRecommendation(
+            level: "Advanced",
+            description: "好きな有名人のインタビュー動画や、洋画のシーンをディクテーション＆シャドーイングしましょう。",
+            steps: [
+                "取り組みたい動画を1つ決める",
+                "その動画のうち、取り組みたい部分を1分程度切り取って選ぶ",
+                "その部分のディクテーションを行う",
+                "字幕を見ながらディクテーションの答え合わせをする",
+                "発音やアクセントに気をつけながら、シャドーイングを行う"
+            ],
+            resources: [
+                "https://youtu.be/gkr57P0fwbI?si=cKVJtWKPFV5EysJJ"
+            ]
+        )
     ],
-    "speaking": [
-        "beginner": "基本的な自己紹介や日常会話を練習して、日常的なコミュニケーション能力を向上させましょう。",
-        "intermediate": "日本人の先生と英会話をしましょう。",
-        "advanced": "英語でのディベートやプレゼンテーション行い、複雑なトピックでも流暢に意見を表現する能力を身につけましょう。"
-    ],
+    
     "grammar": [
-        "beginner": "英語の基礎文法書を用いて、言語の基本構造をしっかり理解し、例文を作ってみましょう。",
-        "intermediate": "英語の短編小説や記事を読んで、分からなかった文章の文法を学びましょう。",
-        "advanced": "自分で英語日記を書いてみましょう。分からなかった部分は書いて復習しましょう。"
+        "beginner": StudyRecommendation(
+            level: "Beginner",
+            description: "英語の基礎文法書や文法解説動画を用いて、言語の基本構造をしっかり理解し、例文を作ってみましょう。",
+            steps: [
+                "英語の基礎文法書を読む",
+                "文法解説動画を見る",
+                "例文を作ってみる"
+            ],
+            resources: [
+                "https://youtu.be/D9tPzH3fXtc?si=0-WrFNuUkaVbuURY"
+            ]
+        ),
+        "intermediate": StudyRecommendation(
+            level: "Intermediate",
+            description: "英語の短編小説や記事を読んで、分からなかった文章の文法を学びましょう。",
+            steps: [
+                "短編小説や記事を読む",
+                "分からなかった文章の文法を調べる",
+                "調べた文法を使って自分で文を作ってみる"
+            ],
+            resources: [
+                "https://www.newsinlevels.com"
+            ]
+        ),
+        "advanced": StudyRecommendation(
+            level: "Advanced",
+            description: "自分で英語日記を書いてみましょう。分からなかった部分は書いて復習しましょう。",
+            steps: [
+                "日記を英語で書く",
+                "分からなかった単語や文法を調べる",
+                "復習をする"
+            ],
+            resources: []
+        )
     ],
     "vocabulary": [
-        "beginner": "基本単語帳やフラッシュカードを使い、初歩的な単語とフレーズを効果的に覚えましょう。",
-        "intermediate": "記事や小説の中の新しい単語をメモして、文脈の中での語彙の使用方法を学びましょう。",
-        "advanced": "自分で英語日記を書いてみましょう。分からなかった単語は日本語で書いて最後に復習し、表現を増やしましょう。"
-    ]
+        "beginner": StudyRecommendation(
+            level: "Beginner",
+            description: "基本単語帳やフラッシュカードを使い、初歩的な単語とフレーズを効果的に覚えましょう",
+            steps: [
+                "この動画に出てくる単語を全て覚えましょう！"
+            ],
+            resources: [
+                "https://youtu.be/CkHUxGQ_h1s?si=UMWmBddPfT20VvzG"
+            ]
+        ),
+        "intermediate": StudyRecommendation(
+            level: "Intermediate",
+            description: "記事や小説の中の新しい単語をメモして、文脈の中での語集の使用方法を学びましょう。",
+            steps: [
+                "取り組みたい小説を一つ決める",
+                "その小説のうち、取り組みたい部分を1文程度切り取って選ぶ",
+                "その部分の日本語訳を理解する",
+                "発音やアクセントに気をつけながら、シャドーイングを行う"
+            ],
+            resources: [
+                "https://www.newsinlevels.com"
+            ]
+        ),
+        "advanced": StudyRecommendation(
+            level: "Advanced",
+            description: "自分で英語日記を書いてみましょう。分からなかった単語は日本語で書いて最後に復習し、表現を増やしましょう。",
+            steps: [
+                "まずは、次のお題に対して、３文で日記を書いてみましょう！",
+                "How was your day?",
+                "What did you do?"
+            ], resources: []
+        )
+    ],
 ]
 
 func getMostNeededStudyMethod(scores: [String: Double]) -> String? {
@@ -40,7 +143,7 @@ func getMostNeededStudyMethod(scores: [String: Double]) -> String? {
         level = "beginner"
     }
 
-    return studyRecommendations[lowestSkill]?[level]
+    return studyRecommendations[lowestSkill]?[level]?.description
 }
 
 
