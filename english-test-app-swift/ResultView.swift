@@ -74,7 +74,7 @@ struct ResultView: View {
                         .padding()
                     }
                     if viewModel.isAuthenticated {
-                        NavigationLink(destination: LearningPage()) {
+                        NavigationLink(destination: LearningView()) {
                             Text("学習ページへ")
                                 .padding()
                                 .frame(maxWidth: .infinity)
