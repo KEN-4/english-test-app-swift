@@ -53,7 +53,61 @@ let studyRecommendations: [String: [String: StudyRecommendation]] = [
             ]
         )
     ],
-    
+    "speaking": [
+        "beginner": StudyRecommendation(
+            level: "Beginner",
+            description: "自己紹介を簡単な英語でできるようにしましょう！",
+            steps: [
+                "（             )にあなたの情報を入れて自己紹介文を完成させましょう！",
+                "Hello, I’m (             ).",
+                "I’m (          ) years old.",
+                "I live in (             ).",
+                "My hobby is (                )."
+            ],
+            resources: []
+        ),
+        "intermediate": StudyRecommendation(
+            level: "Intermediate",
+            description: "簡単な日常会話や決まったシーンでの会話をできるようにしましょう！",
+            steps: [
+                "ファストフード店でのやり取りの会話を練習しましょう",
+                "（　　　　）に入る英語を考えましょう",
+                "店員：Hi!What can I get for you? /What would you like to order?",
+                "you：（　　　　　　　　　　）",
+                "店員：just the burger, or as a combo?セット：combo/meal",
+                "you：（　　　　　　　　　　）",
+                "you：（　　　　　　　　　　）",
+                "店員：What would you like for the side menu?",
+                "you：（　　　　　　　　　　）",
+                "店員：Ok, anything else?",
+                "you：（　　　　　　　　　　）",
+                "店員：Will it be for here or to go?",
+                "you：（　　　　　　　　　　）",
+                "店員：Ok, your total will be $6.50.",
+                "you：（　　　　　　　　　　）",
+                "店員：Please insert the card here.",
+                "you：（　　　　　　　　　　）",
+                "店員：Do you need a receipt?",
+                "you：（　　　　　　　　　　）",
+                "店員：Ok, we will call your number once your food is ready."
+            ],
+            resources: [
+                "https://elllo.org/video/0726/737-Rocio-Who-Admire.html"
+            ]
+        ),
+        "advanced": StudyRecommendation(
+            level: "Advanced",
+            description: "英会話レッスンに挑戦しましょう！プロの先生と英語で話して、指摘してもらいましょう",
+            steps: [
+                "取り組みたい英会話を1つ決める",
+                "英会話レッスンの予約をする",
+                "英会話レッスンをする"
+            ],
+            resources: [
+                "https://hana-englishroom.my.canva.site/"
+            ]
+        )
+    ],
     "grammar": [
         "beginner": StudyRecommendation(
             level: "Beginner",
