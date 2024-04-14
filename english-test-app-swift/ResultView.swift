@@ -92,13 +92,10 @@ struct ResultView: View {
                 }
                 .navigationBarTitle("診断結果")
                 .onAppear {
-                    if let savedScores = UserDefaults.standard.object(forKey: "userScores") as? [String: Double] {
-                        scoreModel.scores = savedScores
-                        debugPrint("保存されたスコア: \(savedScores)")
+                    if let userData = UserDefaults.standard.dictionary(forKey: "UserData") {
+                        debugPrint("保存されたユーザーデータ: \(userData)")
                     }
-                    shareText = formatShareText()
                 }
-                
             }
         }
     }

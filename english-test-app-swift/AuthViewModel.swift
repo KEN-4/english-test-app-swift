@@ -9,7 +9,7 @@ class AuthViewModel: ObservableObject {
     init() {
         observeAuthChanges()
     }
-
+    
     private func observeAuthChanges() {
         Auth.auth().addStateDidChangeListener { [weak self] _, user in
             DispatchQueue.main.async {
@@ -58,7 +58,7 @@ class AuthViewModel: ObservableObject {
             }
         }
     }
-
+    
     
     func signUp(email: String, password: String, scores: [String: Double]) {
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
@@ -76,15 +76,24 @@ class AuthViewModel: ObservableObject {
             }
         }
     }
-
-    private func saveUserInfo(user: User, email: String, scores: [String: Double]) {
+    
+    func saveUserInfo(user: User, email: String, scores: [String: Double]) {
         let uid = user.uid
+        let animalDetails = getAnimalTypeAndDetails(scores: scores)
+        let recommendation = getMostNeededStudyMethod(scores: scores) ?? ""
+        let recommendationSteps = studyRecommendations[animalDetails.name]?[recommendation]?.steps ?? []
+        
         let userData = [
             "createdAt": Timestamp(date: Date()),
             "email": email,
-            "result_scores": scores
+            "result_scores": scores,
+            "animalType": animalDetails.name,
+            "recommendation": recommendation,
+            "learningProgress": recommendationSteps.reduce(into: [String: Bool]()) { (dict, step) in
+                dict[step] = false // 初期状態は全て未完了(false)
+            }
         ] as [String : Any]
-
+        
         Firestore.firestore().collection("users").document(uid).setData(userData) { error in
             if let error = error {
                 print("Firestoreへの保存に失敗しました：\(error.localizedDescription)")
@@ -115,20 +124,39 @@ class AuthViewModel: ObservableObject {
     
     func fetchScoresAndUpdateUserDefaults(uid: String) {
         let userRef = Firestore.firestore().collection("users").document(uid)
-        userRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                if let data = document.data(), let scores = data["result_scores"] as? [String: Double] {
-                    // UserDefaultsにスコアを保存
-                    UserDefaults.standard.set(scores, forKey: "userScores")
-                    
-                    // 必要に応じてその他のUI更新処理を実行
-                    print("スコアをUserDefaultsに保存しました: \(scores)")
+        userRef.getDocument { [weak self] (document, error) in
+            DispatchQueue.main.async {
+                if let document = document, document.exists {
+                    if let data = document.data(), let scores = data["result_scores"] as? [String: Double] {
+                        self?.updateUserDefaults(scores: scores)
+                        print("スコアをUserDefaultsに保存しました: \(scores)")
+                    } else {
+                        print("スコアの取得に失敗しました。")
+                    }
                 } else {
-                    print("スコアの取得に失敗しました。")
+                    print("ドキュメントが存在しません: \(error?.localizedDescription ?? "不明なエラー")")
                 }
-            } else {
-                print("ドキュメントが存在しません: \(error?.localizedDescription ?? "不明なエラー")")
             }
         }
+    }
+    
+    func updateUserDefaults(scores: [String: Double]) {
+        let animalDetails = getAnimalTypeAndDetails(scores: scores)
+        let recommendation = getMostNeededStudyMethod(scores: scores) ?? ""
+        let recommendationSteps = studyRecommendations[animalDetails.name]?[recommendation]?.steps ?? []
+
+        var currentProgress = UserDefaults.standard.dictionary(forKey: "LearningProgress") as? [String: Bool] ?? [:]
+        recommendationSteps.forEach { step in
+            if currentProgress[step] == nil {
+                currentProgress[step] = false
+            }
+        }
+
+        UserDefaults.standard.set([
+            "scores": scores,
+            "animalType": animalDetails.name,
+            "recommendation": recommendation,
+            "learningProgress": currentProgress
+        ], forKey: "UserData")
     }
 }
