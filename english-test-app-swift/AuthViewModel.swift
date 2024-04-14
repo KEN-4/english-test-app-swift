@@ -88,6 +88,8 @@ class AuthViewModel: ObservableObject {
             "email": email,
             "result_scores": scores,
             "animalType": animalDetails.name,
+            "animalDescription": animalDetails.description,
+            "imageName": animalDetails.imageName,
             "recommendation": recommendation,
             "learningProgress": recommendationSteps.reduce(into: [String: Bool]()) { (dict, step) in
                 dict[step] = false // 初期状態は全て未完了(false)
@@ -102,6 +104,7 @@ class AuthViewModel: ObservableObject {
             }
         }
     }
+
     
     // パスワードをリセットするメソッド
     func resetPassword(email: String) {
@@ -155,8 +158,13 @@ class AuthViewModel: ObservableObject {
         UserDefaults.standard.set([
             "scores": scores,
             "animalType": animalDetails.name,
+            "animalDescription": animalDetails.description,
+            "imageName": animalDetails.imageName,
             "recommendation": recommendation,
             "learningProgress": currentProgress
         ], forKey: "UserData")
+        if let userData = UserDefaults.standard.dictionary(forKey: "UserData") {
+            debugPrint("保存されたユーザーデータ: \(userData)")
+        }
     }
 }

@@ -12,13 +12,14 @@ class QuestionViewModel: ObservableObject {
     @Published var showResultView = false
     @Published var textInput: String = ""
     @Published var choicesMade: [String] = []
+    var scores: [String: Double] = ["listening": 0, "speaking": 0, "grammar": 0, "vocabulary": 0]
+    var authViewModel: AuthViewModel
     
     var progress: Float {
         guard !questions.isEmpty else { return 0 }
         return Float(currentQuestionIndex) / Float(questions.count - 1)
     }
 
-    
     var audioPlayer: AVAudioPlayer?
     var scoreModel = ScoreModel()
     
@@ -28,6 +29,7 @@ class QuestionViewModel: ObservableObject {
     }
     
     init(collection: String = "questions") {
+        self.authViewModel = AuthViewModel()
         fetchQuestions(from: collection)
     }
 
@@ -144,7 +146,6 @@ class QuestionViewModel: ObservableObject {
                 }
             }
         }
-        
         selectedChoice = nil
     }
 
@@ -156,6 +157,15 @@ class QuestionViewModel: ObservableObject {
             isAnswered = false
             result = nil
         } else {
+            if let savedScores = UserDefaults.standard.dictionary(forKey: "userScores") as? [String: Double] {
+                scores = savedScores
+                debugPrint("Final scores before saving: \(scores)")
+            }
+            // 全ての質問が終了したらスコアをUserDefaultsに保存
+            authViewModel.updateUserDefaults(scores: scores)
+            if let userData = UserDefaults.standard.dictionary(forKey: "UserData") {
+                debugPrint("Saved user data: \(userData)")
+            }
             showResultView = true
         }
     }

@@ -42,7 +42,7 @@ struct ChoiceQuestionView: View {
             // ResultViewへのモーダル遷移をviewModel.showResultViewに基づいて設定
             .fullScreenCover(isPresented: $viewModel.showResultView) {
                 // ここでモーダルとして表示したいビューを指定
-                ResultView(viewModel: authViewModel, scoreModel: viewModel.scoreModel)
+                ResultView(viewModel: authViewModel)
             }
         }
     }
