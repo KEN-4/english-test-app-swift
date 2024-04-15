@@ -102,6 +102,7 @@ struct ResultView: View {
                     } else {
                         debugPrint("No learning progress found.")
                     }
+                    debugPrint("Loaded userData on appear: \(self.userData)")
                 }
             }
         }
@@ -118,6 +119,9 @@ struct ResultView: View {
             learningProgress = storedData["learningProgress"] as? [String: Bool] ?? [:]
             recommendationResources = storedData["recommendationResources"] as? String ?? ""
             shareText = formatShareText()
+            debugPrint("Loaded userData in loadDataFromUserDefaults: \(userData)")
+        } else {
+            debugPrint("No userData found in UserDefaults.")
         }
     }
 

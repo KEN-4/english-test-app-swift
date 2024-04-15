@@ -20,16 +20,32 @@ struct LearningView: View {
                             Text(step)
                             Spacer()
                             Button(action: {
-                                let newValue = !(learningProgress[step] ?? false)
-                                learningProgress[step] = newValue
-                                UserDefaults.standard.set(learningProgress, forKey: "learningProgress")
-                                print("Step: \(step), New Value: \(newValue)") // Debug print statement
+                                let currentStatus = learningProgress[step] ?? false
+                                learningProgress[step] = !currentStatus
+                                userData["learningProgress"] = learningProgress
+                                UserDefaults.standard.set(userData, forKey: "userData")
+                                print("Updated learning progress for \(step): \(learningProgress[step] ?? false)")
                             }) {
                                 Image(systemName: learningProgress[step] ?? false ? "checkmark.circle.fill" : "circle")
                             }
                             .buttonStyle(PlainButtonStyle())
                         }
                     }
+                }
+                // リソースリンクの表示
+                if let resources = userData["recommendationResources"] as? [String] {
+                    VStack(alignment: .leading) {
+                        Text("リソースリンク:")
+                            .font(.headline)
+                            .padding(.top)
+                        ForEach(resources, id: \.self) { resource in
+                            Link(destination: URL(string: resource)!) {
+                                Text(resource)
+                                    .foregroundColor(.blue)
+                            }
+                        }
+                    }
+                    .padding()
                 }
             } else {
                 Text("現在おすすめの学習方法はありません。")
