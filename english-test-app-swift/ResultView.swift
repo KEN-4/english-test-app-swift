@@ -13,8 +13,8 @@ struct Photo: Transferable {
 
 struct ResultView: View {
     @ObservedObject var viewModel: AuthViewModel
-    @State private var showingLogin = false // ログイン画面表示フラグ
-    @State private var showingSignup = false // 新規登録画面表示フラグ
+    @State private var showingLogin = false
+    @State private var showingSignup = false
     @State private var userData: [String: Any] = [:]
     @State private var scores: [String: Double] = ["listening": 0, "speaking": 0, "grammar": 0, "vocabulary": 0]
     @State private var animalType: String = ""
@@ -22,6 +22,8 @@ struct ResultView: View {
     @State private var imageName: String = ""
     @State private var recommendation: String = ""
     @State private var shareText: String = ""
+    @State private var learningProgress: [String: Bool] = [:]
+    @State private var recommendationResources: String = ""
     
     var body: some View {
         NavigationView {
@@ -93,8 +95,12 @@ struct ResultView: View {
                 .navigationBarTitle("診断結果")
                 .onAppear {
                     loadDataFromUserDefaults()
-                    if let userData = UserDefaults.standard.dictionary(forKey: "UserData") {
-                        debugPrint("保存されたユーザーデータ: \(userData)")
+                    if let userData = UserDefaults.standard.dictionary(forKey: "userData"),
+                       let learningProgressData = userData["learningProgress"] as? [String: Bool] {
+                        self.learningProgress = learningProgressData
+                        debugPrint("Loaded learning progress: \(learningProgress)")
+                    } else {
+                        debugPrint("No learning progress found.")
                     }
                 }
             }
@@ -102,13 +108,15 @@ struct ResultView: View {
     }
 
     private func loadDataFromUserDefaults() {
-        if let storedData = UserDefaults.standard.dictionary(forKey: "UserData") as? [String: Any] {
+        if let storedData = UserDefaults.standard.dictionary(forKey: "userData") {
             userData = storedData
             scores = storedData["scores"] as? [String: Double] ?? [:]
             animalType = storedData["animalType"] as? String ?? ""
             animalDescription = storedData["animalDescription"] as? String ?? ""
             imageName = storedData["imageName"] as? String ?? ""
             recommendation = storedData["recommendation"] as? String ?? ""
+            learningProgress = storedData["learningProgress"] as? [String: Bool] ?? [:]
+            recommendationResources = storedData["recommendationResources"] as? String ?? ""
             shareText = formatShareText()
         }
     }

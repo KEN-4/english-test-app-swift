@@ -180,9 +180,10 @@ let studyRecommendations: [String: [String: StudyRecommendation]] = [
     ],
 ]
 
-func getMostNeededStudyMethod(scores: [String: Double]) -> String? {
+func getMostNeededStudyMethod(scores: [String: Double]) -> (description: String, steps: [String], resources: [String]) {
     guard let lowestSkill = scores.min(by: { $0.value < $1.value })?.key else {
-        return nil
+        debugPrint("Failed to find the lowest skill")
+        return ("", [], [])
     }
     
     let score = scores[lowestSkill, default: 0.0]
@@ -197,8 +198,15 @@ func getMostNeededStudyMethod(scores: [String: Double]) -> String? {
         level = "beginner"
     }
 
-    return studyRecommendations[lowestSkill]?[level]?.description
+    guard let recommendation = studyRecommendations[lowestSkill]?[level] else {
+        debugPrint("No recommendation found for \(lowestSkill) at level \(level)")
+        return ("No recommendation available", [], [])
+    }
+
+    debugPrint("Found recommendation steps: \(recommendation.steps)")
+    return (recommendation.description, recommendation.steps, recommendation.resources)
 }
+
 
 
 

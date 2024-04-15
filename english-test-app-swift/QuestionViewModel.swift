@@ -163,7 +163,7 @@ class QuestionViewModel: ObservableObject {
             }
             // 全ての質問が終了したらスコアをUserDefaultsに保存
             authViewModel.updateUserDefaults(scores: scores)
-            if let userData = UserDefaults.standard.dictionary(forKey: "UserData") {
+            if let userData = UserDefaults.standard.dictionary(forKey: "userData") {
                 debugPrint("Saved user data: \(userData)")
             }
             showResultView = true

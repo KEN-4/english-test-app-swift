@@ -80,8 +80,15 @@ class AuthViewModel: ObservableObject {
     func saveUserInfo(user: User, email: String, scores: [String: Double]) {
         let uid = user.uid
         let animalDetails = getAnimalTypeAndDetails(scores: scores)
-        let recommendation = getMostNeededStudyMethod(scores: scores) ?? ""
-        let recommendationSteps = studyRecommendations[animalDetails.name]?[recommendation]?.steps ?? []
+        let recommendationResult = getMostNeededStudyMethod(scores: scores)
+        let recommendationDescription = recommendationResult.description
+        let recommendationSteps = recommendationResult.steps
+        let recommendationResources = recommendationResult.resources
+        
+        debugPrint("Animal Type: \(animalDetails.name)")
+        debugPrint("Recommendation Description: \(recommendationDescription)")
+        debugPrint("Recommendation Steps: \(recommendationSteps)")
+        debugPrint("Recommendation Resources: \(recommendationResources)")
         
         let userData = [
             "createdAt": Timestamp(date: Date()),
@@ -90,10 +97,11 @@ class AuthViewModel: ObservableObject {
             "animalType": animalDetails.name,
             "animalDescription": animalDetails.description,
             "imageName": animalDetails.imageName,
-            "recommendation": recommendation,
+            "recommendation": recommendationDescription,
             "learningProgress": recommendationSteps.reduce(into: [String: Bool]()) { (dict, step) in
-                dict[step] = false // 初期状態は全て未完了(false)
-            }
+                dict[step] = false  // 最初はすべてのステップを未完了（false）として設定
+            },
+            "recommendationResources": recommendationResources
         ] as [String : Any]
         
         Firestore.firestore().collection("users").document(uid).setData(userData) { error in
@@ -119,7 +127,12 @@ class AuthViewModel: ObservableObject {
         do {
             try Auth.auth().signOut()
             isAuthenticated = false
-            isNewUser = false  // ログアウト時には新規ユーザーではない
+            isNewUser = false
+            UserDefaults.standard.removeObject(forKey: "userData")
+            UserDefaults.standard.removeObject(forKey: "userScores")
+            UserDefaults.standard.removeObject(forKey: "learningProgress")
+
+            print("ユーザーデータをUserDefaultsから削除しました。")
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
         }
@@ -145,10 +158,17 @@ class AuthViewModel: ObservableObject {
     
     func updateUserDefaults(scores: [String: Double]) {
         let animalDetails = getAnimalTypeAndDetails(scores: scores)
-        let recommendation = getMostNeededStudyMethod(scores: scores) ?? ""
-        let recommendationSteps = studyRecommendations[animalDetails.name]?[recommendation]?.steps ?? []
+        let recommendationResult = getMostNeededStudyMethod(scores: scores)
+        let recommendationDescription = recommendationResult.description
+        let recommendationSteps = recommendationResult.steps
+        let recommendationResources = recommendationResult.resources
+        
+        debugPrint("Animal Type: \(animalDetails.name)")
+        debugPrint("Recommendation Description: \(recommendationDescription)")
+        debugPrint("Recommendation Steps: \(recommendationSteps)")
+        debugPrint("Recommendation Resources: \(recommendationResources)")
 
-        var currentProgress = UserDefaults.standard.dictionary(forKey: "LearningProgress") as? [String: Bool] ?? [:]
+        var currentProgress = UserDefaults.standard.dictionary(forKey: "learningProgress") as? [String: Bool] ?? [:]
         recommendationSteps.forEach { step in
             if currentProgress[step] == nil {
                 currentProgress[step] = false
@@ -160,10 +180,13 @@ class AuthViewModel: ObservableObject {
             "animalType": animalDetails.name,
             "animalDescription": animalDetails.description,
             "imageName": animalDetails.imageName,
-            "recommendation": recommendation,
-            "learningProgress": currentProgress
-        ], forKey: "UserData")
-        if let userData = UserDefaults.standard.dictionary(forKey: "UserData") {
+            "recommendation": recommendationDescription,
+            "learningProgress": recommendationSteps.reduce(into: [String: Bool]()) { (dict, step) in
+                dict[step] = false  // 最初はすべてのステップを未完了（false）として設定
+            },
+            "recommendationResources": recommendationResources
+        ], forKey: "userData")
+        if let userData = UserDefaults.standard.dictionary(forKey: "userData") {
             debugPrint("保存されたユーザーデータ: \(userData)")
         }
     }
