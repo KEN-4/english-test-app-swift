@@ -84,8 +84,12 @@ class QuestionViewModel: ObservableObject {
         isAnswered = true
         if choice == currentQuestion.correctAnswer {
             result = "⚪︎"
-            currentQuestion.skills.forEach { skill in
-                scoreModel.addScore(skill: skill, additionalScore: currentQuestion.score)
+            currentQuestion.skills.forEach { skillString in
+                if let skill = ScoreModel.SkillType(rawValue: skillString) {
+                    scoreModel.addScore(skill: skill, additionalScore: currentQuestion.score)
+                } else {
+                    print("Invalid skill type: \(skillString)")
+                }
             }
         } else {
             result = "×"
@@ -103,8 +107,12 @@ class QuestionViewModel: ObservableObject {
         }) {
             debugPrint("正解")
             result = "⚪︎"
-            currentQuestion.skills.forEach { skill in
-                scoreModel.addScore(skill: skill, additionalScore: currentQuestion.score)
+            currentQuestion.skills.forEach { skillString in
+                if let skill = ScoreModel.SkillType(rawValue: skillString) {
+                    scoreModel.addScore(skill: skill, additionalScore: currentQuestion.score)
+                } else {
+                    print("Invalid skill type: \(skillString)")
+                }
             }
         } else {
             debugPrint("不正解")
@@ -141,8 +149,12 @@ class QuestionViewModel: ObservableObject {
         func updateResult(isCorrect: Bool) {
             result = isCorrect ? "⚪︎" : "×"
             if isCorrect {
-                currentQuestion.skills.forEach { skill in
-                    scoreModel.addScore(skill: skill, additionalScore: currentQuestion.score)
+                currentQuestion.skills.forEach { skillString in
+                    if let skill = ScoreModel.SkillType(rawValue: skillString) {
+                        scoreModel.addScore(skill: skill, additionalScore: currentQuestion.score)
+                    } else {
+                        print("Invalid skill type: \(skillString)")
+                    }
                 }
             }
         }
