@@ -1,11 +1,17 @@
 import Foundation
 
 class ScoreModel {
-    enum SkillType: String {
+    enum SkillType: String, Comparable, CaseIterable {
         case listening = "listening"
         case speaking = "speaking"
         case grammar = "grammar"
         case vocabulary = "vocabulary"
+        
+        // Comparableに準拠すると、この関数を定義しなければならない（定義することで大小比較が可能になる）
+        // アルファベット順に比較
+        static func < (lhs: SkillType, rhs: SkillType) -> Bool {
+            return lhs.rawValue < rhs.rawValue
+        }
     }
     
     var scores: [SkillType: Double] = [

@@ -181,7 +181,12 @@ let studyRecommendations: [String: [String: StudyRecommendation]] = [
 ]
 
 func getMostNeededStudyMethod(scores: [String: Double]) -> (description: String, steps: [String], resources: [String]) {
-    guard let lowestSkill = scores.min(by: { $0.value < $1.value })?.key else {
+    guard let lowestSkill = scores.min(by: {
+        if $0.value == $1.value {
+            return $0.key < $1.key
+        }
+        return $0.value < $1.value
+    })?.key else {
         debugPrint("Failed to find the lowest skill")
         return ("", [], [])
     }
@@ -235,8 +240,13 @@ let animalTypes: [String: [String: (name: String, description: String, imageName
 
 
 func getAnimalTypeAndDetails(scores: [String: Double]) -> (name: String, description: String, imageName: String) {
-    guard let highestSkill = scores.max(by: { $0.value < $1.value })?.key else {
-         return ("不明", "動物タイプが特定できません", "")
+    guard let highestSkill = scores.max(by: {
+        if $0.value == $1.value {
+            return $0.key > $1.key
+        }
+        return $0.value < $1.value
+    })?.key else {
+        return ("不明", "動物タイプが特定できません", "")
     }
     
     let score = scores[highestSkill, default: 0.0]
