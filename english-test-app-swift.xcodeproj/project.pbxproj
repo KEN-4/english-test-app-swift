@@ -32,6 +32,7 @@
 		E7C707CD2B86E20600459D4A /* english_test_app_swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C707CC2B86E20600459D4A /* english_test_app_swift.swift */; };
 		E7C707D12B86E20800459D4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7C707D02B86E20800459D4A /* Assets.xcassets */; };
 		E7C707D42B86E20800459D4A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7C707D32B86E20800459D4A /* Preview Assets.xcassets */; };
+		E7C9EEDA2BDD14EC00289BFA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C9EED92BDD14EC00289BFA /* UserData.swift */; };
 		E7E00FE82B95F4CA003DEE42 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = E7E00FE72B95F4CA003DEE42 /* DGCharts */; };
 		E7E00FEA2B9690DE003DEE42 /* UIViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E00FE92B9690DE003DEE42 /* UIViewControllerRepresentable.swift */; };
 		E7E637AE2B8C9D1F0019B843 /* VoiceChoiceQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E637AD2B8C9D1F0019B843 /* VoiceChoiceQuestionView.swift */; };
@@ -79,6 +80,7 @@
 		E7C707CC2B86E20600459D4A /* english_test_app_swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = english_test_app_swift.swift; sourceTree = "<group>"; };
 		E7C707D02B86E20800459D4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7C707D32B86E20800459D4A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E7C9EED92BDD14EC00289BFA /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		E7E00FE92B9690DE003DEE42 /* UIViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerRepresentable.swift; sourceTree = "<group>"; };
 		E7E637AD2B8C9D1F0019B843 /* VoiceChoiceQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceChoiceQuestionView.swift; sourceTree = "<group>"; };
 		E7E637AF2B8EBAE60019B843 /* ConversationQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationQuestionView.swift; sourceTree = "<group>"; };
@@ -135,8 +137,7 @@
 				E7FD79702BC2A6B000E64010 /* GoogleService-Info.plist */,
 				E7C707CC2B86E20600459D4A /* english_test_app_swift.swift */,
 				E79C1BC72BBF9F660071B2D4 /* LaunchScreen.swift */,
-				E7B6ACA02B86EACA00784056 /* AppDelegate.swift */,
-				E74E06392BA00565007CAFA5 /* DebugModel.swift */,
+				E7C9EED92BDD14EC00289BFA /* UserData.swift */,
 				E7B6ACBF2B88352500784056 /* RecommendModel.swift */,
 				E7B6ACBD2B8834DC00784056 /* ScoreModel.swift */,
 				E74E06372B9E8CC1007CAFA5 /* DesignSystem.swift */,
@@ -160,6 +161,8 @@
 				E7B6ACAF2B874E2A00784056 /* SignUpView.swift */,
 				E7B6ACA92B87455700784056 /* SignInView.swift */,
 				E7B6ACB12B874E9900784056 /* ResetPasswordView.swift */,
+				E74E06392BA00565007CAFA5 /* DebugModel.swift */,
+				E7B6ACA02B86EACA00784056 /* AppDelegate.swift */,
 				E7C707D02B86E20800459D4A /* Assets.xcassets */,
 			);
 			path = "english-test-app-swift";
@@ -281,6 +284,7 @@
 				E7B6ACAA2B87455700784056 /* SignInView.swift in Sources */,
 				E79C1BC82BBF9F660071B2D4 /* LaunchScreen.swift in Sources */,
 				E7E637B02B8EBAE60019B843 /* ConversationQuestionView.swift in Sources */,
+				E7C9EEDA2BDD14EC00289BFA /* UserData.swift in Sources */,
 				E7C707CD2B86E20600459D4A /* english_test_app_swift.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -423,6 +427,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -456,6 +461,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
