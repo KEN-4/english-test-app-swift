@@ -14,9 +14,6 @@ class AuthViewModel: ObservableObject {
         Auth.auth().addStateDidChangeListener { [weak self] _, user in
             DispatchQueue.main.async {
                 self?.isAuthenticated = user != nil
-                if let uid = user?.uid {
-                    self?.fetchScoresAndUpdateUserDefaults(uid: uid)
-                }
             }
         }
     }
@@ -188,6 +185,17 @@ class AuthViewModel: ObservableObject {
         ], forKey: "userData")
         if let userData = UserDefaults.standard.dictionary(forKey: "userData") {
             debugPrint("保存されたユーザーデータ: \(userData)")
+        }
+    }
+    
+    func saveLearningProgressToFirebase(uid: String, learningProgress: [String: Bool]) {
+        let userRef = Firestore.firestore().collection("users").document(uid)
+        userRef.updateData(["learningProgress": learningProgress]) { error in
+            if let error = error {
+                print("Learning progress の保存に失敗しました: \(error.localizedDescription)")
+            } else {
+                print("Learning progress を Firebase に保存しました")
+            }
         }
     }
 }

@@ -1,6 +1,8 @@
 import SwiftUI
+import FirebaseAuth
 
 struct LearningView: View {
+    @ObservedObject var viewModel: AuthViewModel
     @State private var userData: [String: Any] = UserDefaults.standard.dictionary(forKey: "userData") ?? [:]
     @State private var learningProgress: [String: Bool] = [:]
 
@@ -15,7 +17,7 @@ struct LearningView: View {
                     .padding()
 
                 if let steps = userData["learningProgress"] as? [String: Bool] {
-                    List(steps.keys.sorted(), id: \.self) { step in
+                    List(steps.keys.sorted().reversed(), id: \.self) { step in
                         HStack {
                             Text(step)
                             Spacer()
@@ -24,6 +26,9 @@ struct LearningView: View {
                                 learningProgress[step] = !currentStatus
                                 userData["learningProgress"] = learningProgress
                                 UserDefaults.standard.set(userData, forKey: "userData")
+                                if let uid = Auth.auth().currentUser?.uid {
+                                    viewModel.saveLearningProgressToFirebase(uid: uid, learningProgress: learningProgress)
+                                }
                                 print("Updated learning progress for \(step): \(learningProgress[step] ?? false)")
                             }) {
                                 Image(systemName: learningProgress[step] ?? false ? "checkmark.circle.fill" : "circle")
@@ -32,20 +37,21 @@ struct LearningView: View {
                         }
                     }
                 }
-                // リソースリンクの表示
                 if let resources = userData["recommendationResources"] as? [String] {
-                    VStack(alignment: .leading) {
-                        Text("リソースリンク:")
-                            .font(.headline)
-                            .padding(.top)
-                        ForEach(resources, id: \.self) { resource in
-                            Link(destination: URL(string: resource)!) {
-                                Text(resource)
-                                    .foregroundColor(.blue)
+                    if resources.allSatisfy({ !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }) {
+                        VStack(alignment: .leading) {
+                            Text("リソースリンク:")
+                                .font(.headline)
+                                .padding(.top)
+                            ForEach(resources, id: \.self) { resource in
+                                Link(destination: URL(string: resource)!) {
+                                    Text(resource)
+                                        .foregroundColor(.blue)
+                                }
                             }
                         }
+                        .padding()
                     }
-                    .padding()
                 }
             } else {
                 Text("現在おすすめの学習方法はありません。")
