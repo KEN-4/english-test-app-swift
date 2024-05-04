@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "turtle.png",
+      "filename" : "turtle.jpeg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "turtle@2x.png",
+      "filename" : "turtle@2x.jpeg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "turtle@3x.png",
+      "filename" : "turtle@3x.jpeg",
       "idiom" : "universal",
       "scale" : "3x"
     }

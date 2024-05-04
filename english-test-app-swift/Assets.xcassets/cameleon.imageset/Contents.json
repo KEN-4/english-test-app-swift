@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "dolphin.jpg",
+      "filename" : "cameleon.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "dolphin@2x.jpg",
+      "filename" : "cameleon@2x.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "dolphin@3x.jpg",
+      "filename" : "cameleon@3x.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }
