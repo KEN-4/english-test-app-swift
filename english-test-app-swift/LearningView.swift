@@ -38,12 +38,12 @@ struct LearningView: View {
                     }
                 }
                 if let resources = userData["recommendationResources"] as? [String] {
-                    if resources.allSatisfy({ !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }) {
+                    if resources.contains(where: { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }) {
                         VStack(alignment: .leading) {
                             Text("リソースリンク:")
                                 .font(.headline)
                                 .padding(.top)
-                            ForEach(resources, id: \.self) { resource in
+                            ForEach(resources.filter({ !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }), id: \.self) { resource in
                                 Link(destination: URL(string: resource)!) {
                                     Text(resource)
                                         .foregroundColor(.blue)
