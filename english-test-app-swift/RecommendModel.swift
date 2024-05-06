@@ -218,23 +218,23 @@ func getMostNeededStudyMethod(scores: [String: Double]) -> (description: String,
 let animalTypes: [String: [String: (name: String, description: String, imageName: String)]] = [
     "listening": [
         "beginner": ("カメ", "ゆっくりと聞き、情報を吸収するあなたはカメタイプです。", "turtle"),
-        "intermediate": ("キツネ", "機敏に情報をキャッチし分析するあなたはキツネタイプです。", "fox"),
-        "advanced": ("チーター", "高速で情報を処理するあなたはチータータイプです。", "cheetah")
+        "intermediate": ("タヌキ", "様々な音に注意を払い、聞き分ける能力があるあなたはタヌキタイプです。", "raccoon"),
+        "advanced": ("イルカ", "複雑な音のパターンを理解し、高度なコミュニケーションを行うあなたはイルカタイプです。", "dolphin")
     ],
     "speaking": [
-        "beginner": ("カナリア", "明るく鳴き、周りを楽しませるあなたはカナリアタイプです。", "canary"),
-        "intermediate": ("オウム", "色々な言葉を覚えて周りに伝えるあなたはオウムタイプです。", "parrot"),
-        "advanced": ("インコ", "鮮やかで存在感があり、高度なコミュニケーションを取るあなたはインコタイプです。", "parakeet")
+        "beginner": ("スズメ", "日常的な鳴き声で、基本的なコミュニケーションを行うあなたはスズメタイプです。", "sparrow"),
+        "intermediate": ("フクロウ", "夜行性で、静かにしかし確実に声を出し始めるあなたはフクロウタイプです。", "owl"),
+        "advanced": ("インコ", "鮮やかで、多様な表現力で自己表現するあなたはインコタイプです。", "parakeet")
     ],
     "grammar": [
-        "beginner": ("アリ", "地道に基礎を積み重ねるあなたはアリタイプです。", "ant"),
-        "intermediate": ("ゾウ", "大きなステップを踏み出し、記憶力も抜群のあなたはゾウタイプです。", "elephant"),
-        "advanced": ("イルカ", "高度な知識を活用し、柔軟に思考するあなたはイルカタイプです。", "dolphin")
+        "beginner": ("カタツムリ", "ゆっくりとしたペースで確実に文法の基礎を固めるあなたはカタツムリタイプです。", "snails"),
+        "intermediate": ("ペンギン", "社交的な学習で、文法の知識を広げるあなたはペンギンタイプです。", "penguin"),
+        "advanced": ("カメレオン", "環境に応じて様々な文法を柔軟に適応するあなたはカメレオンタイプです。", "cameleon")
     ],
     "vocabulary": [
-        "beginner": ("ウサギ", "素早く基本的な単語を集めるあなたはウサギタイプです。", "rabbit"),
-        "intermediate": ("リス", "活動的に様々な単語を集め、使いこなすあなたはリスタイプです。", "squirrel"),
-        "advanced": ("ヒョウ", "広い範囲の語彙を持ち、敏捷に使い分けるあなたはヒョウタイプです。", "leopard")
+        "beginner": ("コアラ", "のんびりと基本語彙を噛み締めるあなたはコアラタイプです。", "koala"),
+        "intermediate": ("リス", "活動的に周りから新しい語彙を集め、貯蔵するあなたはリスタイプです。", "squirrel"),
+        "advanced": ("サル", "柔軟性があり、様々な単語を使えるあなたはサルタイプです。", "monkey")
     ]
 ]
 
