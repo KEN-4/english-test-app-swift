@@ -11,7 +11,7 @@ struct EnglishTestAppSwift: App {
         WindowGroup {
             LaunchScreen()
                 .environmentObject(viewModel)
-                .modelContainer(for: UserData.self)
+//                .modelContainer(for: UserData.self)
         }
     }
 }
