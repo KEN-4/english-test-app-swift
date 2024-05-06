@@ -80,8 +80,8 @@ struct ResultView: View {
                             Text("学習ページへ")
                                 .padding()
                                 .frame(maxWidth: .infinity)
-                                .background(Color.blue)
-                                .foregroundColor(.white)
+                                .background(Color.customBlue)
+                                .foregroundColor(Color.customWhite)
                                 .cornerRadius(10)
                         }
                         .padding()
@@ -90,6 +90,20 @@ struct ResultView: View {
                             viewModel.signOut()
                         }
                         .padding()
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .background(Color.customRed)
+                        .foregroundColor(.customWhite)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                        Button("アカウント削除") {
+                            viewModel.deleteUser()
+                        }
+                        .padding()
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .background(Color.customRed)
+                        .foregroundColor(.customWhite)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
                     }
                 }
                 .navigationBarTitle("診断結果")

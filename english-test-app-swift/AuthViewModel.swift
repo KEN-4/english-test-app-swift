@@ -127,13 +127,29 @@ class AuthViewModel: ObservableObject {
             isNewUser = false
             UserDefaults.standard.removeObject(forKey: "userData")
             UserDefaults.standard.removeObject(forKey: "userScores")
-            UserDefaults.standard.removeObject(forKey: "learningProgress")
-
             print("ユーザーデータをUserDefaultsから削除しました。")
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
         }
     }
+    
+    // アカウントを削除するメソッド
+    func deleteUser() {
+        Auth.auth().currentUser?.delete { error in
+            if let error = error {
+                print("アカウントの削除に失敗しました: \(error.localizedDescription)")
+            } else {
+                print("アカウントが正常に削除されました。")
+                // アカウント削除後の追加処理（必要に応じて）
+                self.isAuthenticated = false
+                self.isNewUser = false
+                UserDefaults.standard.removeObject(forKey: "userData")
+                UserDefaults.standard.removeObject(forKey: "userScores")
+                print("ユーザーデータをUserDefaultsから削除しました。")
+            }
+        }
+    }
+
     
     func fetchScoresAndUpdateUserDefaults(uid: String) {
         let userRef = Firestore.firestore().collection("users").document(uid)
